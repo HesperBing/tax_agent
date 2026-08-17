@@ -7,3 +7,4 @@
 - 建立项目基础目录。
 - 配置 DeepSeek API 环境并完成连接测试。
 - 添加 Tax Agent 技术节点图。
+- 添加 Dify Workflow v0.1 技术规划和节点清单。
