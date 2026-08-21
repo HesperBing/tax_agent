@@ -1,0 +1,88 @@
+{
+  "version": "v1.1",
+  "atomic_rules": [
+    {
+      "rule_id": "RULE_IIT_WITHHOLDING_APPLICABILITY_001",
+      "rule_domain": "withholding_obligation",
+      "target_judgement_item": "withholding_obligation_applicability",
+      "conditions": [
+        {
+          "condition_id": "COND_IIT_SUBSTANCE_001",
+          "condition_type": "deterministic_condition",
+          "fact_path": "/objects/TRANSACTION_MOCK_001/substance_code",
+          "operator": "eq",
+          "expected_value": "technical_consulting"
+        },
+        {
+          "condition_id": "COND_IIT_REGULATION_001",
+          "condition_type": "deterministic_condition",
+          "fact_path": "/objects/REGULATION_MOCK_001/value",
+          "operator": "eq",
+          "expected_value": true
+        }
+      ],
+      "evidence_requirement_group_ids": ["ERG_WITHHOLDING_001"],
+      "rule_result_status": "confirmed_triggered",
+      "version": "v0.1"
+    },
+    {
+      "rule_id": "RULE_IIT_WITHHOLDING_EVIDENCE_001",
+      "rule_domain": "withholding_obligation",
+      "target_judgement_item": "withholding_evidence_sufficient",
+      "conditions": [
+        {
+          "condition_id": "COND_WITHHOLDING_EVIDENCE_001",
+          "condition_type": "deterministic_condition",
+          "fact_path": "/objects/EVIDENCE_STATE_MOCK_001/state",
+          "operator": "eq",
+          "expected_value": "provided"
+        }
+      ],
+      "evidence_requirement_group_ids": ["ERG_WITHHOLDING_001"],
+      "rule_result_status": "confirmed_triggered",
+      "version": "v0.1"
+    },
+    {
+      "rule_id": "RULE_IIT_FILING_COMPLETION_001",
+      "rule_domain": "tax_filing_payment",
+      "target_judgement_item": "iit_filing_completed",
+      "conditions": [
+        {
+          "condition_id": "COND_IIT_FILING_STATUS_001",
+          "condition_type": "deterministic_condition",
+          "fact_path": "/business_statuses/FILING_STAGE_MOCK_001/status",
+          "operator": "eq",
+          "expected_value": "confirmed_done"
+        }
+      ],
+      "evidence_requirement_group_ids": [],
+      "rule_result_status": "confirmed_triggered",
+      "version": "v0.1"
+    }
+  ],
+  "evidence_requirement_groups": [
+    {
+      "evidence_requirement_group_id": "ERG_WITHHOLDING_001",
+      "evidence_requirement_ids": ["payment_evidence", "withholding_evidence"],
+      "version": "v0.1"
+    }
+  ],
+  "risk_trigger_rules": [
+    {
+      "risk_trigger_rule_id": "RISK_TRIGGER_WITHHOLDING_NOT_PERFORMED_001",
+      "pattern": "obligation_not_performed",
+      "risk_event_type": "withholding_obligation_not_performed",
+      "target_judgement_item": "withholding_obligation_payment_obligation",
+      "guard_conditions": [
+        {
+          "condition_id": "COND_WITHHOLDING_NOT_PERFORMED_001",
+          "condition_type": "deterministic_condition",
+          "fact_path": "/resolved_obligations/withholding/value",
+          "operator": "eq",
+          "expected_value": true
+        }
+      ],
+      "version": "v0.1"
+    }
+  ]
+}

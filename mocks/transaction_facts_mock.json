@@ -1,0 +1,13 @@
+{
+  "tax_case_id": "CASE_RULE_MOCK_001",
+  "transaction_facts": [
+    {
+      "transaction_fact_id": "TRANSACTION_MOCK_001",
+      "economic_substance_ref": "SUBSTANCE_MOCK_001",
+      "substance_code": "technical_consulting",
+      "contract_fact_refs": ["CONTRACT_CONTENT_MOCK_001"],
+      "actual_fact_refs": ["ACTUAL_PAYMENT_MOCK_001"],
+      "evidence_state_refs": ["EVIDENCE_STATE_MOCK_001"]
+    }
+  ]
+}

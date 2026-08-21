@@ -1,0 +1,67 @@
+{
+  "tax_case_id": "CASE_RULE_MOCK_001",
+  "rule_execution_results": [
+    {
+      "rule_execution_id": "EXEC_RULE_IIT_FILING_COMPLETION_001",
+      "rule_id": "RULE_IIT_FILING_COMPLETION_001",
+      "target_judgement_item": "iit_filing_completed",
+      "status": "unknown",
+      "value": null,
+      "legal_basis_ids": [],
+      "fact_basis_ids": ["FILING_STAGE_MOCK_001"],
+      "evaluated_condition_ids": ["COND_IIT_FILING_STATUS_001"]
+    },
+    {
+      "rule_execution_id": "EXEC_RULE_IIT_WITHHOLDING_APPLICABILITY_001",
+      "rule_id": "RULE_IIT_WITHHOLDING_APPLICABILITY_001",
+      "target_judgement_item": "withholding_obligation_applicability",
+      "status": "confirmed_triggered",
+      "value": true,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["REGULATION_MOCK_001", "TRANSACTION_MOCK_001"],
+      "evaluated_condition_ids": ["COND_IIT_SUBSTANCE_001", "COND_IIT_REGULATION_001"]
+    },
+    {
+      "rule_execution_id": "EXEC_RULE_IIT_WITHHOLDING_EVIDENCE_001",
+      "rule_id": "RULE_IIT_WITHHOLDING_EVIDENCE_001",
+      "target_judgement_item": "withholding_evidence_sufficient",
+      "status": "unknown",
+      "value": null,
+      "legal_basis_ids": [],
+      "fact_basis_ids": ["EVIDENCE_STATE_MOCK_001"],
+      "evaluated_condition_ids": ["COND_WITHHOLDING_EVIDENCE_001"]
+    }
+  ],
+  "judgement_resolution_results": [
+    {
+      "judgement_resolution_id": "RESOLUTION_iit_filing_completed",
+      "target_judgement_item": "iit_filing_completed",
+      "resolution_status": "insufficient",
+      "value": null,
+      "legal_basis_ids": [],
+      "fact_basis_ids": ["FILING_STAGE_MOCK_001"],
+      "supporting_rule_execution_ids": ["EXEC_RULE_IIT_FILING_COMPLETION_001"],
+      "conflicting_rule_execution_ids": []
+    },
+    {
+      "judgement_resolution_id": "RESOLUTION_withholding_evidence_sufficient",
+      "target_judgement_item": "withholding_evidence_sufficient",
+      "resolution_status": "insufficient",
+      "value": null,
+      "legal_basis_ids": [],
+      "fact_basis_ids": ["EVIDENCE_STATE_MOCK_001"],
+      "supporting_rule_execution_ids": ["EXEC_RULE_IIT_WITHHOLDING_EVIDENCE_001"],
+      "conflicting_rule_execution_ids": []
+    },
+    {
+      "judgement_resolution_id": "RESOLUTION_withholding_obligation_applicability",
+      "target_judgement_item": "withholding_obligation_applicability",
+      "resolution_status": "resolved",
+      "value": true,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["REGULATION_MOCK_001", "TRANSACTION_MOCK_001"],
+      "supporting_rule_execution_ids": ["EXEC_RULE_IIT_WITHHOLDING_APPLICABILITY_001"],
+      "conflicting_rule_execution_ids": []
+    }
+  ]
+}

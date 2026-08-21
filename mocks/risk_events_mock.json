@@ -1,0 +1,63 @@
+{
+  "tax_case_id": "CASE_RULE_MOCK_001",
+  "risk_events": [
+    {
+      "risk_event_id": "RISK_WITHHOLDING_MOCK_001",
+      "tax_case_id": "CASE_RULE_MOCK_001",
+      "risk_event_type": "withholding_obligation_not_performed",
+      "risk_event_name": "已确认扣缴义务未履行",
+      "tax_type": "individual_income_tax",
+      "target_judgement_item": "withholding_obligation_payment_obligation",
+      "substance_codes": ["technical_consulting"],
+      "related_transaction_fact_ids": ["TRANSACTION_MOCK_001"],
+      "related_judgement_resolution_ids": ["RESOLUTION_withholding_obligation_applicability"],
+      "related_rule_execution_ids": ["EXEC_RULE_IIT_WITHHOLDING_APPLICABILITY_001"],
+      "related_tax_impact_ids": ["TAX_IMPACT_MOCK_001"],
+      "supporting_risk_trigger_rule_ids": ["RISK_TRIGGER_WITHHOLDING_NOT_PERFORMED_001"],
+      "impact_group_id": "IMPACT_GROUP_MOCK_001",
+      "period_start": "2026-08-01",
+      "period_end": "2026-08-31",
+      "severity_scores": {
+        "tax_consequence_severity": 3,
+        "tax_amount_impact": 2,
+        "obligation_violation_severity": 4,
+        "duration_severity": 1,
+        "impact_scope": 1
+      },
+      "weighted_severity": 2.6,
+      "health_score_loss": 26,
+      "risk_level": "critical",
+      "suppressed_for_scoring": false,
+      "suppressed_parent_risk_event_ids": []
+    },
+    {
+      "risk_event_id": "RISK_INVOICE_MOCK_001",
+      "tax_case_id": "CASE_RULE_MOCK_001",
+      "risk_event_type": "invoice_incorrect_item",
+      "risk_event_name": "发票项目与确认业务不一致",
+      "tax_type": "value_added_tax",
+      "target_judgement_item": "invoice_details",
+      "substance_codes": ["technical_consulting"],
+      "related_transaction_fact_ids": ["TRANSACTION_MOCK_001"],
+      "related_judgement_resolution_ids": [],
+      "related_rule_execution_ids": [],
+      "related_tax_impact_ids": [],
+      "supporting_risk_trigger_rule_ids": ["RISK_TRIGGER_INVOICE_ITEM_001"],
+      "impact_group_id": null,
+      "period_start": "2026-08-01",
+      "period_end": "2026-08-31",
+      "severity_scores": {
+        "tax_consequence_severity": 1,
+        "tax_amount_impact": 0,
+        "obligation_violation_severity": 1,
+        "duration_severity": 1,
+        "impact_scope": 1
+      },
+      "weighted_severity": 0.8,
+      "health_score_loss": 8,
+      "risk_level": "medium",
+      "suppressed_for_scoring": false,
+      "suppressed_parent_risk_event_ids": []
+    }
+  ]
+}

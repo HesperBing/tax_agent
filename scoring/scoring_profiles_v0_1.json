@@ -1,0 +1,25 @@
+{
+  "version": "v0.1",
+  "weights": {
+    "tax_consequence_severity": 0.25,
+    "tax_amount_impact": 0.20,
+    "obligation_violation_severity": 0.30,
+    "duration_severity": 0.15,
+    "impact_scope": 0.10
+  },
+  "profiles": {
+    "tax_treatment_error": {"tax_consequence_severity": 2, "obligation_violation_severity": 1},
+    "tax_shortfall": {"tax_consequence_severity": 2, "obligation_violation_severity": 2},
+    "late_obligation": {"tax_consequence_severity": 2, "obligation_violation_severity": 2},
+    "obligation_not_performed": {"tax_consequence_severity": 3, "obligation_violation_severity": 4},
+    "invoice_missing": {"tax_consequence_severity": 2, "obligation_violation_severity": 3},
+    "invoice_content_error": {"tax_consequence_severity": 1, "obligation_violation_severity": 1},
+    "tax_timing_error": {"tax_consequence_severity": 1, "obligation_violation_severity": 1}
+  },
+  "risk_level_thresholds": [
+    {"level": "low", "minimum": 0, "maximum_exclusive": 5},
+    {"level": "medium", "minimum": 5, "maximum_exclusive": 15},
+    {"level": "high", "minimum": 15, "maximum_exclusive": 25},
+    {"level": "critical", "minimum": 25, "maximum_exclusive": null}
+  ]
+}

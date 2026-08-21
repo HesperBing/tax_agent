@@ -1,0 +1,23 @@
+{
+  "tax_case_id": "CASE_RULE_MOCK_001",
+  "objects": {
+    "TRANSACTION_MOCK_001": {
+      "transaction_fact_id": "TRANSACTION_MOCK_001",
+      "substance_code": "technical_consulting"
+    },
+    "REGULATION_MOCK_001": {
+      "regulation_result_id": "REGULATION_MOCK_001",
+      "value": true,
+      "legal_basis_ids": ["LAW_IIT_003"]
+    },
+    "EVIDENCE_STATE_MOCK_001": {
+      "evidence_state_id": "EVIDENCE_STATE_MOCK_001",
+      "state": "unknown"
+    }
+  },
+  "business_statuses": {
+    "FILING_STAGE_MOCK_001": {
+      "status": "pending"
+    }
+  }
+}
