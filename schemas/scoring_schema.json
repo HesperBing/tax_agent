@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/scoring_schema.json",
+  "title": "Scoring Outputs v1.1",
+  "$defs": {
+    "tax_health_score": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tax_case_id", "tax_health_score", "total_health_score_loss", "final_risk_event_ids"],
+      "properties": {
+        "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "tax_health_score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "total_health_score_loss": { "type": "number", "minimum": 0 },
+        "final_risk_event_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+      }
+    },
+    "evidence_loss_detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_requirement_instance_id", "evidence_requirement_id", "evidence_state_id", "state", "configured_loss", "state_factor", "actual_evidence_coverage_loss"],
+      "properties": {
+        "evidence_requirement_instance_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "evidence_requirement_id": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "evidence_state_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "state": { "$ref": "common_defs_schema.json#/$defs/evidence_state" },
+        "configured_loss": { "enum": [6, 8, 10, 12] },
+        "state_factor": { "enum": [0, 0.5, 1] },
+        "actual_evidence_coverage_loss": { "type": "number", "minimum": 0, "maximum": 12 }
+      },
+      "allOf": [
+        { "if": { "properties": { "state": { "const": "provided" } }, "required": ["state"] }, "then": { "properties": { "state_factor": { "const": 0 }, "actual_evidence_coverage_loss": { "const": 0 } } } },
+        { "if": { "properties": { "state": { "const": "unknown" } }, "required": ["state"] }, "then": { "properties": { "state_factor": { "const": 0.5 } } } },
+        { "if": { "properties": { "state": { "const": "missing" } }, "required": ["state"] }, "then": { "properties": { "state_factor": { "const": 1 } } } },
+        { "if": { "properties": { "state": { "const": "not_applicable" } }, "required": ["state"] }, "then": false }
+      ]
+    },
+    "evidence_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tax_case_id", "evidence_coverage", "total_evidence_coverage_loss", "evidence_loss_details"],
+      "properties": {
+        "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "evidence_coverage": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "total_evidence_coverage_loss": { "type": "number", "minimum": 0, "maximum": 100 },
+        "evidence_loss_details": { "type": "array", "items": { "$ref": "#/$defs/evidence_loss_detail" } }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_health_score", "evidence_coverage"],
+  "properties": {
+    "tax_health_score": { "$ref": "#/$defs/tax_health_score" },
+    "evidence_coverage": { "$ref": "#/$defs/evidence_coverage" }
+  }
+}

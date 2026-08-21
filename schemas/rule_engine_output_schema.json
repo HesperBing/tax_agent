@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/rule_engine_output_schema.json",
+  "title": "Rule Engine Output v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "rule_execution_results", "judgement_resolution_results"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "rule_execution_results": { "type": "array", "items": { "$ref": "#/$defs/rule_execution_result" } },
+    "judgement_resolution_results": { "type": "array", "items": { "$ref": "#/$defs/judgement_resolution_result" } }
+  },
+  "$defs": {
+    "rule_execution_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_execution_id", "rule_id", "target_judgement_item", "status", "value", "legal_basis_ids", "fact_basis_ids"],
+      "properties": {
+        "rule_execution_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "rule_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "target_judgement_item": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "status": { "$ref": "common_defs_schema.json#/$defs/rule_result_status" },
+        "value": {},
+        "legal_basis_ids": { "$ref": "common_defs_schema.json#/$defs/legal_basis_ids" },
+        "fact_basis_ids": { "$ref": "common_defs_schema.json#/$defs/fact_basis_ids" },
+        "evaluated_condition_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+      }
+    },
+    "judgement_resolution_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["judgement_resolution_id", "target_judgement_item", "resolution_status", "value", "legal_basis_ids", "fact_basis_ids", "supporting_rule_execution_ids"],
+      "properties": {
+        "judgement_resolution_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "target_judgement_item": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "resolution_status": { "$ref": "common_defs_schema.json#/$defs/resolution_status" },
+        "value": {},
+        "legal_basis_ids": { "$ref": "common_defs_schema.json#/$defs/legal_basis_ids" },
+        "fact_basis_ids": { "$ref": "common_defs_schema.json#/$defs/fact_basis_ids" },
+        "supporting_rule_execution_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "conflicting_rule_execution_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "resolution_status": { "enum": ["conflict", "insufficient"] } }, "required": ["resolution_status"] },
+          "then": { "properties": { "value": { "type": "null" } } }
+        }
+      ]
+    }
+  }
+}

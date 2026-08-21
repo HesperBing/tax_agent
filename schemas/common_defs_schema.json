@@ -1,0 +1,291 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/common_defs_schema.json",
+  "title": "Tax Agent Common Definitions v1.1",
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[A-Za-z][A-Za-z0-9._:-]*$"
+    },
+    "registry_code": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "json_pointer": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "nullable_date": {
+      "oneOf": [
+        { "$ref": "#/$defs/date" },
+        { "type": "null" }
+      ]
+    },
+    "datetime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "nullable_datetime": {
+      "oneOf": [
+        { "$ref": "#/$defs/datetime" },
+        { "type": "null" }
+      ]
+    },
+    "currency": {
+      "type": "string",
+      "pattern": "^[A-Z]{3}$"
+    },
+    "nullable_currency": {
+      "oneOf": [
+        { "$ref": "#/$defs/currency" },
+        { "type": "null" }
+      ]
+    },
+    "nullable_number": {
+      "type": ["number", "null"]
+    },
+    "nonnegative_number": {
+      "type": "number",
+      "minimum": 0
+    },
+    "nullable_nonnegative_number": {
+      "oneOf": [
+        { "$ref": "#/$defs/nonnegative_number" },
+        { "type": "null" }
+      ]
+    },
+    "nullable_string": {
+      "type": ["string", "null"]
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "id_array": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/identifier" },
+      "uniqueItems": true
+    },
+    "registry_code_array": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/registry_code" },
+      "uniqueItems": true
+    },
+    "source_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_file_id"],
+      "properties": {
+        "source_file_id": { "$ref": "#/$defs/identifier" },
+        "source_page": { "type": ["integer", "null"], "minimum": 1 },
+        "source_text": { "$ref": "#/$defs/nullable_string" },
+        "source_anchor": { "$ref": "#/$defs/nullable_string" },
+        "extraction_confidence": { "$ref": "#/$defs/confidence" }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source_reference" },
+      "minItems": 1
+    },
+    "money": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["known_amount", "total_amount", "currency"],
+      "properties": {
+        "known_amount": { "$ref": "#/$defs/nullable_nonnegative_number" },
+        "total_amount": { "$ref": "#/$defs/nullable_nonnegative_number" },
+        "currency": { "$ref": "#/$defs/currency" }
+      }
+    },
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["period_start", "period_end"],
+      "properties": {
+        "period_start": { "$ref": "#/$defs/nullable_date" },
+        "period_end": { "$ref": "#/$defs/nullable_date" }
+      }
+    },
+    "fact_status": {
+      "enum": ["confirmed_done", "confirmed_not_done", "unknown", "pending", "not_applicable"]
+    },
+    "evidence_state": {
+      "enum": ["provided", "missing", "unknown", "not_applicable"]
+    },
+    "consistency_status": {
+      "enum": ["consistent", "partial", "inconsistent", "unknown", "needs_review"]
+    },
+    "rule_result_status": {
+      "enum": [
+        "confirmed_triggered",
+        "confirmed_not_triggered",
+        "provisional_triggered",
+        "provisional_not_triggered",
+        "unknown"
+      ]
+    },
+    "judgement_status": {
+      "enum": ["confirmed", "partial", "unknown", "not_applicable"]
+    },
+    "resolution_status": {
+      "enum": ["resolved", "conflict", "insufficient"]
+    },
+    "risk_level": {
+      "enum": ["low", "medium", "high", "critical"]
+    },
+    "module_run_status": {
+      "enum": ["not_started", "running", "completed", "failed"]
+    },
+    "case_status": {
+      "enum": ["created", "processing", "failed", "completed"]
+    },
+    "scope_status": {
+      "enum": ["in_scope", "partially_in_scope", "out_of_scope", "needs_review"]
+    },
+    "tax_type": {
+      "allOf": [
+        { "$ref": "#/$defs/registry_code" },
+        { "description": "Must exist in the current Tax Type Registry." }
+      ]
+    },
+    "legal_basis_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/identifier" },
+      "uniqueItems": true
+    },
+    "fact_basis_ids": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/identifier" },
+      "uniqueItems": true
+    },
+    "error_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["success", "error_code", "error_message", "failed_stage"],
+      "properties": {
+        "success": { "const": false },
+        "error_code": { "type": "string", "minLength": 1 },
+        "error_message": { "type": "string", "minLength": 1 },
+        "failed_stage": { "type": "string", "minLength": 1 }
+      }
+    },
+    "treatment_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope_type", "scope_value"],
+      "properties": {
+        "scope_type": { "$ref": "#/$defs/registry_code" },
+        "scope_value": {}
+      }
+    },
+    "judgement_treatment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["treatment_scope", "value", "legal_basis_ids", "fact_basis_ids"],
+      "properties": {
+        "treatment_scope": { "$ref": "#/$defs/treatment_scope" },
+        "value": {},
+        "legal_basis_ids": {
+          "allOf": [
+            { "$ref": "#/$defs/legal_basis_ids" },
+            { "minItems": 1 }
+          ]
+        },
+        "fact_basis_ids": {
+          "allOf": [
+            { "$ref": "#/$defs/fact_basis_ids" },
+            { "minItems": 1 }
+          ]
+        }
+      }
+    },
+    "judgement_detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["substance_code", "value", "legal_basis_ids", "fact_basis_ids"],
+      "properties": {
+        "substance_code": { "$ref": "#/$defs/registry_code" },
+        "value": {},
+        "legal_basis_ids": {
+          "allOf": [
+            { "$ref": "#/$defs/legal_basis_ids" },
+            { "minItems": 1 }
+          ]
+        },
+        "fact_basis_ids": {
+          "allOf": [
+            { "$ref": "#/$defs/fact_basis_ids" },
+            { "minItems": 1 }
+          ]
+        },
+        "treatments": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/judgement_treatment" },
+          "minItems": 1
+        }
+      }
+    },
+    "judgement_atom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "value", "legal_basis_ids", "fact_basis_ids"],
+      "properties": {
+        "status": { "$ref": "#/$defs/judgement_status" },
+        "value": {},
+        "legal_basis_ids": { "$ref": "#/$defs/legal_basis_ids" },
+        "fact_basis_ids": { "$ref": "#/$defs/fact_basis_ids" },
+        "details": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/judgement_detail" },
+          "minItems": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "enum": ["unknown", "not_applicable"] } }, "required": ["status"] },
+          "then": { "properties": { "value": { "type": "null" } } }
+        },
+        {
+          "if": { "properties": { "status": { "const": "not_applicable" } }, "required": ["status"] },
+          "then": { "properties": { "legal_basis_ids": { "minItems": 1 }, "fact_basis_ids": { "minItems": 1 } } }
+        },
+        {
+          "if": {
+            "properties": { "status": { "enum": ["confirmed", "partial"] } },
+            "required": ["status", "details"]
+          },
+          "then": {
+            "properties": {
+              "legal_basis_ids": { "maxItems": 0 },
+              "fact_basis_ids": { "maxItems": 0 }
+            }
+          }
+        },
+        {
+          "if": {
+            "allOf": [
+              { "properties": { "status": { "enum": ["confirmed", "partial"] } }, "required": ["status"] },
+              { "not": { "required": ["details"] } }
+            ]
+          },
+          "then": {
+            "properties": {
+              "legal_basis_ids": { "minItems": 1 },
+              "fact_basis_ids": { "minItems": 1 }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

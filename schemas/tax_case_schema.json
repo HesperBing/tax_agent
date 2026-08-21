@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/tax_case_schema.json",
+  "title": "Tax Case v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "case_status", "created_at", "updated_at", "module_statuses", "source_files"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "case_status": { "$ref": "common_defs_schema.json#/$defs/case_status" },
+    "scope_status": { "$ref": "common_defs_schema.json#/$defs/scope_status" },
+    "scope_reason_codes": { "$ref": "common_defs_schema.json#/$defs/registry_code_array" },
+    "requires_manual_review": { "type": "boolean" },
+    "created_at": { "$ref": "common_defs_schema.json#/$defs/datetime" },
+    "updated_at": { "$ref": "common_defs_schema.json#/$defs/datetime" },
+    "module_statuses": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+      "additionalProperties": { "$ref": "common_defs_schema.json#/$defs/module_run_status" }
+    },
+    "source_files": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/source_file" },
+      "minItems": 1
+    },
+    "file_processing_errors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/file_processing_error" }
+    }
+  },
+  "$defs": {
+    "source_file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_file_id", "source_file_name", "source_file_type"],
+      "properties": {
+        "source_file_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "source_file_name": { "type": "string", "minLength": 1 },
+        "source_file_type": {
+          "enum": [
+            "contract",
+            "invoice",
+            "payment_receipt",
+            "withholding_certificate",
+            "tax_filing_material",
+            "tax_payment_certificate",
+            "acceptance_material",
+            "delivery_material",
+            "other"
+          ]
+        },
+        "contract_document_role": {
+          "enum": ["main_contract", "supplementary_agreement", "amendment_agreement"]
+        },
+        "content_hash": { "type": "string", "minLength": 1 },
+        "classified_at": { "$ref": "common_defs_schema.json#/$defs/datetime" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "source_file_type": { "const": "contract" } }, "required": ["source_file_type"] },
+          "then": { "required": ["contract_document_role"] },
+          "else": { "not": { "required": ["contract_document_role"] } }
+        }
+      ]
+    },
+    "file_processing_error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file_name", "error_code", "error_message", "failed_stage"],
+      "properties": {
+        "file_name": { "type": "string", "minLength": 1 },
+        "error_code": { "type": "string", "minLength": 1 },
+        "error_message": { "type": "string", "minLength": 1 },
+        "failed_stage": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

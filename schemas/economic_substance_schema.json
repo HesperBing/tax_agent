@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/economic_substance_schema.json",
+  "title": "Economic Substance Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "economic_substance_components", "is_mixed"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "economic_substance_components": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/economic_substance_component" },
+      "minItems": 1
+    },
+    "is_mixed": { "type": "boolean" }
+  },
+  "$defs": {
+    "economic_substance_component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["substance_component_id", "substance_code", "classification_status", "role", "amount", "currency", "contract_fact_refs"],
+      "properties": {
+        "substance_component_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "substance_code": {
+          "oneOf": [
+            { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+            { "type": "null" }
+          ]
+        },
+        "classification_status": { "enum": ["classified", "uncertain"] },
+        "role": { "type": ["string", "null"], "enum": ["primary", "ancillary", "independent", null] },
+        "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" },
+        "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" },
+        "contract_fact_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "classification_status": { "const": "uncertain" } }, "required": ["classification_status"] },
+          "then": { "properties": { "substance_code": { "type": "null" } } }
+        },
+        {
+          "if": { "properties": { "classification_status": { "const": "classified" } }, "required": ["classification_status"] },
+          "then": { "properties": { "substance_code": { "$ref": "common_defs_schema.json#/$defs/registry_code" } } }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "schema_version": "v1.1",
+  "tax_case": {
+    "tax_case_id": "CASE_001",
+    "case_status": "completed",
+    "scope_status": "in_scope",
+    "scope_reason_codes": [],
+    "requires_manual_review": false,
+    "created_at": "2026-08-21T10:00:00Z",
+    "updated_at": "2026-08-21T10:05:00Z",
+    "module_statuses": {
+      "contract_facts": "completed",
+      "actual_facts": "completed",
+      "economic_substance": "completed",
+      "evidence": "completed",
+      "transaction_facts": "completed",
+      "consistency_check": "completed",
+      "regulation_results": "completed",
+      "rule_engine": "completed",
+      "tax_judgement": "completed",
+      "risk_scoring": "completed",
+      "final_report": "completed"
+    },
+    "source_files": [
+      {
+        "source_file_id": "FILE_CONTRACT_001",
+        "source_file_name": "contract.pdf",
+        "source_file_type": "contract",
+        "contract_document_role": "main_contract",
+        "classified_at": "2026-08-21T10:00:30Z"
+      }
+    ],
+    "file_processing_errors": []
+  },
+  "contract_facts": {
+    "tax_case_id": "CASE_001",
+    "contract_name": "技术服务合同",
+    "contract_number": null,
+    "contract_date": "2026-08-01",
+    "effective_date": "2026-08-01",
+    "contract_content": "提供技术咨询服务",
+    "contract_content_details": [
+      {
+        "contract_content_detail_id": "CONTRACT_CONTENT_001",
+        "content": "提供技术咨询服务",
+        "amount": null,
+        "currency": null,
+        "sources": [
+          {
+            "source_file_id": "FILE_CONTRACT_001",
+            "source_page": 1,
+            "source_text": "乙方向甲方提供技术咨询服务",
+            "extraction_confidence": 0.98
+          }
+        ]
+      }
+    ],
+    "contract_fact_issues": [],
+    "contract_fact_relations": []
+  },
+  "actual_facts": {
+    "tax_case_id": "CASE_001",
+    "actual_payments": [],
+    "actual_invoices": [],
+    "actual_performances": [],
+    "actual_acceptances": [],
+    "actual_settlements": [],
+    "actual_pricing_bases": [],
+    "actual_expenses": [],
+    "actual_adjustments": [],
+    "actual_agency_transactions": [],
+    "actual_withholdings": [],
+    "actual_tax_filings": [],
+    "actual_tax_payments": [],
+    "actual_tax_treatments": [],
+    "actual_obligation_states": [],
+    "actual_fact_relations": [],
+    "actual_fact_issues": [],
+    "duplicate_groups": []
+  },
+  "economic_substance": {
+    "tax_case_id": "CASE_001",
+    "economic_substance_components": [
+      {
+        "substance_component_id": "SUBSTANCE_001",
+        "substance_code": "technical_consulting",
+        "classification_status": "classified",
+        "role": "primary",
+        "amount": null,
+        "currency": null,
+        "contract_fact_refs": ["CONTRACT_CONTENT_001"]
+      }
+    ],
+    "is_mixed": false
+  },
+  "evidence": {
+    "tax_case_id": "CASE_001",
+    "evidence_requirement_instances": [],
+    "evidence_states": []
+  },
+  "transaction_facts": {
+    "tax_case_id": "CASE_001",
+    "transaction_facts": [
+      {
+        "transaction_fact_id": "TRANSACTION_001",
+        "economic_substance_ref": "SUBSTANCE_001",
+        "substance_code": "technical_consulting",
+        "contract_fact_refs": ["CONTRACT_CONTENT_001"],
+        "actual_fact_refs": [],
+        "evidence_state_refs": []
+      }
+    ]
+  },
+  "consistency_check": {
+    "tax_case_id": "CASE_001",
+    "consistency_checks": []
+  },
+  "regulation_results": {
+    "tax_case_id": "CASE_001",
+    "regulation_results": []
+  },
+  "rule_engine_input": {
+    "tax_case_id": "CASE_001",
+    "transaction_fact_refs": ["TRANSACTION_001"],
+    "economic_substance_refs": ["SUBSTANCE_001"],
+    "consistency_check_refs": [],
+    "regulation_result_refs": [],
+    "evidence_state_refs": [],
+    "actual_tax_filing_refs": [],
+    "actual_tax_payment_refs": []
+  },
+  "rule_engine_output": {
+    "tax_case_id": "CASE_001",
+    "rule_execution_results": [],
+    "judgement_resolution_results": []
+  },
+  "tax_judgement": {
+    "tax_case_id": "CASE_001",
+    "judgement_status": "unknown"
+  },
+  "tax_impact_results": {
+    "tax_case_id": "CASE_001",
+    "tax_impact_results": []
+  },
+  "risk_events": {
+    "tax_case_id": "CASE_001",
+    "risk_events": []
+  },
+  "tax_health_score": {
+    "tax_case_id": "CASE_001",
+    "tax_health_score": 100,
+    "total_health_score_loss": 0,
+    "final_risk_event_ids": []
+  },
+  "evidence_coverage": {
+    "tax_case_id": "CASE_001",
+    "evidence_coverage": 100,
+    "total_evidence_coverage_loss": 0,
+    "evidence_loss_details": []
+  },
+  "next_actions": {
+    "tax_case_id": "CASE_001",
+    "next_actions": []
+  },
+  "final_report": {
+    "tax_case_id": "CASE_001",
+    "summary": "当前材料仅能形成有限分析，未确认正式税务风险。",
+    "contract_summary": "合同约定提供技术咨询服务。",
+    "economic_substance_summary": "经济实质候选为技术咨询。",
+    "actual_performance_summary": "尚无已观察到的实际履约事件。",
+    "tax_judgement_summary": "现有法规与事实输入不足，税务判断为unknown。",
+    "consistency_summary": "暂无可执行的一致性比较项。",
+    "confirmed_risks": [],
+    "pending_items": [],
+    "unknown_items": [],
+    "evidence_gaps": [],
+    "tax_impact_summary": "暂无可确定计算的税务影响。",
+    "tax_health_score": 100,
+    "evidence_coverage": 100,
+    "next_action_refs": [],
+    "legal_basis_ids": [],
+    "generated_at": "2026-08-21T10:05:00Z"
+  }
+}

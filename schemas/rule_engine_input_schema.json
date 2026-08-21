@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/rule_engine_input_schema.json",
+  "title": "Rule Engine Input v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "transaction_fact_refs", "economic_substance_refs", "consistency_check_refs", "regulation_result_refs", "evidence_state_refs", "actual_tax_filing_refs", "actual_tax_payment_refs"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "transaction_fact_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+    "economic_substance_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+    "consistency_check_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+    "regulation_result_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+    "evidence_state_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+    "actual_tax_filing_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+    "actual_tax_payment_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+  }
+}

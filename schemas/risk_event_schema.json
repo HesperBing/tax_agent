@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/risk_event_schema.json",
+  "title": "Risk Event Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "risk_events"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "risk_events": { "type": "array", "items": { "$ref": "#/$defs/risk_event" } }
+  },
+  "$defs": {
+    "severity_scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tax_consequence_severity", "tax_amount_impact", "obligation_violation_severity", "duration_severity", "impact_scope"],
+      "properties": {
+        "tax_consequence_severity": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "tax_amount_impact": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "obligation_violation_severity": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "duration_severity": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "impact_scope": { "type": "integer", "minimum": 0, "maximum": 4 }
+      }
+    },
+    "risk_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["risk_event_id", "tax_case_id", "risk_event_type", "risk_event_name", "tax_type", "target_judgement_item", "substance_codes", "related_transaction_fact_ids", "related_judgement_resolution_ids", "related_rule_execution_ids", "related_tax_impact_ids", "supporting_risk_trigger_rule_ids", "impact_group_id", "period_start", "period_end", "severity_scores", "weighted_severity", "health_score_loss", "risk_level", "suppressed_for_scoring"],
+      "properties": {
+        "risk_event_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "risk_event_type": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "risk_event_name": { "type": "string", "minLength": 1 },
+        "tax_type": { "$ref": "common_defs_schema.json#/$defs/tax_type" },
+        "target_judgement_item": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "substance_codes": { "$ref": "common_defs_schema.json#/$defs/registry_code_array" },
+        "related_transaction_fact_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "related_judgement_resolution_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "related_rule_execution_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "related_tax_impact_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "supporting_risk_trigger_rule_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "impact_group_id": { "oneOf": [{ "$ref": "common_defs_schema.json#/$defs/identifier" }, { "type": "null" }] },
+        "period_start": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+        "period_end": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+        "severity_scores": { "$ref": "#/$defs/severity_scores" },
+        "weighted_severity": { "type": "number", "minimum": 0, "maximum": 4 },
+        "health_score_loss": { "type": "number", "minimum": 0, "maximum": 40 },
+        "risk_level": { "$ref": "common_defs_schema.json#/$defs/risk_level" },
+        "suppressed_for_scoring": { "type": "boolean" },
+        "suppressed_parent_risk_event_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/final_report_schema.json",
+  "title": "Final Report Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "summary", "confirmed_risks", "pending_items", "unknown_items", "evidence_gaps", "tax_impact_summary", "next_action_refs", "legal_basis_ids", "generated_at"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "summary": { "type": "string" },
+    "contract_summary": { "type": "string" },
+    "economic_substance_summary": { "type": "string" },
+    "actual_performance_summary": { "type": "string" },
+    "tax_judgement_summary": { "type": "string" },
+    "consistency_summary": { "type": "string" },
+    "confirmed_risks": { "type": "array", "items": { "$ref": "#/$defs/report_item" } },
+    "pending_items": { "type": "array", "items": { "$ref": "#/$defs/report_item" } },
+    "unknown_items": { "type": "array", "items": { "$ref": "#/$defs/report_item" } },
+    "evidence_gaps": { "type": "array", "items": { "$ref": "#/$defs/report_item" } },
+    "tax_impact_summary": { "type": "string" },
+    "tax_health_score": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
+    "evidence_coverage": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
+    "next_action_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+    "legal_basis_ids": { "$ref": "common_defs_schema.json#/$defs/legal_basis_ids" },
+    "generated_at": { "$ref": "common_defs_schema.json#/$defs/datetime" }
+  },
+  "$defs": {
+    "report_item": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["item_id", "text", "related_object_ids"],
+      "properties": {
+        "item_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "text": { "type": "string", "minLength": 1 },
+        "related_object_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+      }
+    }
+  }
+}

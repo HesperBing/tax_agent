@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/agent_schema.json",
+  "title": "Tax Agent Complete Case Snapshot v1.1",
+  "description": "Root Schema for the current complete Tax Case snapshot. Only the Root stores schema_version.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tax_case",
+    "contract_facts",
+    "actual_facts",
+    "economic_substance",
+    "evidence",
+    "transaction_facts",
+    "consistency_check",
+    "regulation_results",
+    "rule_engine_input",
+    "rule_engine_output",
+    "tax_judgement",
+    "tax_impact_results",
+    "risk_events",
+    "tax_health_score",
+    "evidence_coverage",
+    "next_actions",
+    "final_report"
+  ],
+  "properties": {
+    "schema_version": { "const": "v1.1" },
+    "tax_case": { "$ref": "tax_case_schema.json" },
+    "contract_facts": { "$ref": "contract_facts_schema.json" },
+    "actual_facts": { "$ref": "actual_facts_schema.json" },
+    "economic_substance": { "$ref": "economic_substance_schema.json" },
+    "evidence": { "$ref": "evidence_schema.json" },
+    "transaction_facts": { "$ref": "transaction_facts_schema.json" },
+    "consistency_check": { "$ref": "consistency_check_schema.json" },
+    "regulation_results": { "$ref": "regulation_result_schema.json" },
+    "rule_engine_input": { "$ref": "rule_engine_input_schema.json" },
+    "rule_engine_output": { "$ref": "rule_engine_output_schema.json" },
+    "tax_judgement": { "$ref": "tax_judgement_schema.json" },
+    "tax_impact_results": { "$ref": "tax_impact_result_schema.json" },
+    "risk_events": { "$ref": "risk_event_schema.json" },
+    "tax_health_score": {
+      "oneOf": [
+        { "$ref": "scoring_schema.json#/$defs/tax_health_score" },
+        { "type": "null" }
+      ]
+    },
+    "evidence_coverage": {
+      "oneOf": [
+        { "$ref": "scoring_schema.json#/$defs/evidence_coverage" },
+        { "type": "null" }
+      ]
+    },
+    "next_actions": { "$ref": "next_actions_schema.json" },
+    "final_report": { "$ref": "final_report_schema.json" }
+  }
+}

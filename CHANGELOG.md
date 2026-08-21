@@ -48,3 +48,12 @@
 - Golden Test是否已经完成更新：否，待后续建立
 - 是否需要重新测试：是
 - 当前DeepSeek API连接测试：已通过
+
+## Schema v1.1 - 2026-08-21
+
+- 负责人：成员 C
+- 根据统一原则 v0.6 和业务规则 v2.1，确定核心 JSON Schema v1.1。
+- 新增 19 个基于 JSON Schema Draft 2020-12 的模块化 Schema。
+- 新增 Schema 设计决策说明和最小测试样例。
+- 新增 Schema 自动校验程序，11 项测试全部通过。
+- 后续需冻结各类 Registry、Risk Trigger Rules 和 Scoring Mapping。

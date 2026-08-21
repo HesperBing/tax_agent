@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/tax_judgement_schema.json",
+  "title": "Tax Judgement Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "judgement_status"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "judgement_status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" },
+    "vat": { "$ref": "#/$defs/vat_module" },
+    "surtax": { "$ref": "#/$defs/surtax_module" },
+    "corporate_income_tax": { "$ref": "#/$defs/corporate_income_tax_module" },
+    "individual_income_tax": { "$ref": "#/$defs/individual_income_tax_module" },
+    "withholding_obligation": { "$ref": "#/$defs/withholding_module" },
+    "invoice_obligation": { "$ref": "#/$defs/invoice_module" },
+    "tax_timing": { "$ref": "#/$defs/tax_timing_module" },
+    "tax_preference": { "$ref": "#/$defs/tax_preference_module" },
+    "tax_filing_payment": { "$ref": "#/$defs/tax_filing_payment_module" }
+  },
+  "$defs": {
+    "atom": { "$ref": "common_defs_schema.json#/$defs/judgement_atom" },
+    "vat_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "applicability", "taxpayer", "taxable_activity", "taxable_amount", "tax_rate", "levy_rate", "filing_obligation", "payment_obligation", "filing_deadline", "payment_deadline"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "applicability": { "$ref": "#/$defs/atom" }, "taxpayer": { "$ref": "#/$defs/atom" }, "taxable_activity": { "$ref": "#/$defs/atom" }, "taxable_amount": { "$ref": "#/$defs/atom" }, "tax_rate": { "$ref": "#/$defs/atom" }, "levy_rate": { "$ref": "#/$defs/atom" }, "filing_obligation": { "$ref": "#/$defs/atom" }, "payment_obligation": { "$ref": "#/$defs/atom" }, "filing_deadline": { "$ref": "#/$defs/atom" }, "payment_deadline": { "$ref": "#/$defs/atom" } }
+    },
+    "surtax_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "applicability", "taxpayer", "taxable_basis", "applicable_rate", "filing_obligation", "payment_obligation", "filing_deadline", "payment_deadline"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "applicability": { "$ref": "#/$defs/atom" }, "taxpayer": { "$ref": "#/$defs/atom" }, "taxable_basis": { "$ref": "#/$defs/atom" }, "applicable_rate": { "$ref": "#/$defs/atom" }, "filing_obligation": { "$ref": "#/$defs/atom" }, "payment_obligation": { "$ref": "#/$defs/atom" }, "filing_deadline": { "$ref": "#/$defs/atom" }, "payment_deadline": { "$ref": "#/$defs/atom" } }
+    },
+    "corporate_income_tax_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "applicability", "taxpayer", "income_type", "taxable_income_basis", "applicable_tax_rate", "filing_obligation", "payment_obligation", "filing_deadline", "payment_deadline"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "applicability": { "$ref": "#/$defs/atom" }, "taxpayer": { "$ref": "#/$defs/atom" }, "income_type": { "$ref": "#/$defs/atom" }, "taxable_income_basis": { "$ref": "#/$defs/atom" }, "applicable_tax_rate": { "$ref": "#/$defs/atom" }, "filing_obligation": { "$ref": "#/$defs/atom" }, "payment_obligation": { "$ref": "#/$defs/atom" }, "filing_deadline": { "$ref": "#/$defs/atom" }, "payment_deadline": { "$ref": "#/$defs/atom" } }
+    },
+    "individual_income_tax_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "applicability", "taxpayer", "income_type", "taxable_income_basis", "applicable_tax_rate", "withholding_relation", "filing_obligation", "payment_obligation", "filing_deadline", "payment_deadline"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "applicability": { "$ref": "#/$defs/atom" }, "taxpayer": { "$ref": "#/$defs/atom" }, "income_type": { "$ref": "#/$defs/atom" }, "taxable_income_basis": { "$ref": "#/$defs/atom" }, "applicable_tax_rate": { "$ref": "#/$defs/atom" }, "withholding_relation": { "$ref": "#/$defs/atom" }, "filing_obligation": { "$ref": "#/$defs/atom" }, "payment_obligation": { "$ref": "#/$defs/atom" }, "filing_deadline": { "$ref": "#/$defs/atom" }, "payment_deadline": { "$ref": "#/$defs/atom" } }
+    },
+    "withholding_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "applicability", "withholding_agent", "withheld_tax_type", "withholding_basis", "withholding_rate", "filing_obligation", "payment_obligation", "filing_deadline", "payment_deadline"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "applicability": { "$ref": "#/$defs/atom" }, "withholding_agent": { "$ref": "#/$defs/atom" }, "withheld_tax_type": { "$ref": "#/$defs/atom" }, "withholding_basis": { "$ref": "#/$defs/atom" }, "withholding_rate": { "$ref": "#/$defs/atom" }, "filing_obligation": { "$ref": "#/$defs/atom" }, "payment_obligation": { "$ref": "#/$defs/atom" }, "filing_deadline": { "$ref": "#/$defs/atom" }, "payment_deadline": { "$ref": "#/$defs/atom" } }
+    },
+    "invoice_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "applicability", "invoice_issuer", "invoice_details", "invoice_amount_basis"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "applicability": { "$ref": "#/$defs/atom" }, "invoice_issuer": { "$ref": "#/$defs/atom" }, "invoice_details": { "$ref": "#/$defs/atom" }, "invoice_amount_basis": { "$ref": "#/$defs/atom" } }
+    },
+    "tax_timing_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "vat_tax_liability_time", "corporate_income_recognition_time", "individual_income_tax_time", "withholding_time", "invoice_time"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "vat_tax_liability_time": { "$ref": "#/$defs/atom" }, "corporate_income_recognition_time": { "$ref": "#/$defs/atom" }, "individual_income_tax_time": { "$ref": "#/$defs/atom" }, "withholding_time": { "$ref": "#/$defs/atom" }, "invoice_time": { "$ref": "#/$defs/atom" } }
+    },
+    "tax_preference_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "preferences"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "preferences": { "type": "array", "items": { "$ref": "#/$defs/preference" } } }
+    },
+    "preference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["preference_id", "tax_type", "preference_type", "eligibility_status", "preference_rate", "effective_period"],
+      "properties": { "preference_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "tax_type": { "$ref": "common_defs_schema.json#/$defs/tax_type" }, "preference_type": { "$ref": "common_defs_schema.json#/$defs/registry_code" }, "eligibility_status": { "$ref": "#/$defs/atom" }, "preference_rate": { "$ref": "#/$defs/atom" }, "effective_period": { "$ref": "#/$defs/atom" } }
+    },
+    "filing_payment_entry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["filing_obligation", "payment_obligation", "filing_deadline", "payment_deadline"],
+      "properties": { "filing_obligation": { "$ref": "#/$defs/atom" }, "payment_obligation": { "$ref": "#/$defs/atom" }, "filing_deadline": { "$ref": "#/$defs/atom" }, "payment_deadline": { "$ref": "#/$defs/atom" } }
+    },
+    "tax_filing_payment_module": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status"],
+      "properties": { "status": { "$ref": "common_defs_schema.json#/$defs/judgement_status" }, "vat": { "$ref": "#/$defs/filing_payment_entry" }, "surtax": { "$ref": "#/$defs/filing_payment_entry" }, "corporate_income_tax": { "$ref": "#/$defs/filing_payment_entry" }, "individual_income_tax": { "$ref": "#/$defs/filing_payment_entry" }, "withholding": { "$ref": "#/$defs/filing_payment_entry" } }
+    }
+  }
+}

@@ -3,6 +3,7 @@
 面向中国合同收入场景的税务健康评分与大模型税务助手。
 
 当前统一规范版本：`v0.6`
+当前 JSON Schema 版本：`v1.1`
 
 ## 项目简介
 
@@ -67,7 +68,7 @@ Tax Case和上传文件
 
 ## 项目目录
 
-- `schemas/`：JSON Schema接口定义
+- `schemas/`：JSON Schema v1.1接口定义与说明
 - `enums/`：统一枚举
 - `prompts/`：大模型Prompt
 - `regulations/`：税务法规资料
@@ -107,10 +108,12 @@ API配置通过本地`.env`文件读取，仓库只提供`.env.example`作为配
 - 技术架构v0.6
 - Dify Workflow v0.6技术规划
 - DeepSeek API环境准备和连接测试
+- JSON Schema v1.1核心数据结构
+- Schema设计决策和最小测试样例
+- Schema自动校验，11项测试全部通过
 
 后续工作：
 
-- 编写JSON Schema v1.1
 - 冻结各类Registry
 - 编写Rule Engine
 - 编写Risk Trigger Rules
@@ -124,3 +127,5 @@ API配置通过本地`.env`文件读取，仓库只提供`.env.example`作为配
 - 当前统一原则：`docs/unified_principles.md`
 - 技术架构：`docs/technical_architecture.md`
 - Dify规划：`dify/workflow_plan_v0_6.md`
+- Schema设计决策：`docs/schema_v1_1_decisions.md`
+- Schema文件说明：`schemas/README.md`

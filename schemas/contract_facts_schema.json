@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/contract_facts_schema.json",
+  "title": "Contract Facts Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "contract_fact_issues", "contract_fact_relations"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "contract_name": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+    "contract_number": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+    "contract_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+    "effective_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+    "contract_content": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+    "contract_parties": { "type": "array", "items": { "$ref": "#/$defs/contract_party" } },
+    "contract_amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" },
+    "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" },
+    "contract_amount_details": { "type": "array", "items": { "$ref": "#/$defs/amount_detail" } },
+    "contract_content_details": { "type": "array", "items": { "$ref": "#/$defs/content_detail" } },
+    "payment_terms": { "type": "array", "items": { "$ref": "#/$defs/payment_term" } },
+    "invoice_terms": { "type": "array", "items": { "$ref": "#/$defs/invoice_term" } },
+    "performance_terms": { "type": "array", "items": { "$ref": "#/$defs/performance_term" } },
+    "acceptance_terms": { "type": "array", "items": { "$ref": "#/$defs/acceptance_term" } },
+    "withholding_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "tax_burden_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "tax_compliance_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "adjustment_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "expense_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "exchange_rate_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "agency_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "pricing_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "settlement_terms": { "type": "array", "items": { "$ref": "#/$defs/clause_term" } },
+    "contract_fact_issues": { "type": "array", "items": { "$ref": "#/$defs/contract_fact_issue" } },
+    "contract_fact_relations": { "type": "array", "items": { "$ref": "#/$defs/contract_fact_relation" } }
+  },
+  "$defs": {
+    "contract_party": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_party_id", "party_role", "name", "sources"],
+      "properties": {
+        "contract_party_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "party_role": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "name": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "entity_type": { "oneOf": [{ "$ref": "common_defs_schema.json#/$defs/registry_code" }, { "type": "null" }] },
+        "identifiers": { "type": "object", "additionalProperties": { "type": ["string", "null"] } },
+        "sources": { "$ref": "common_defs_schema.json#/$defs/sources" }
+      }
+    },
+    "amount_detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_amount_detail_id", "amount", "currency", "sources"],
+      "properties": {
+        "contract_amount_detail_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "description": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" },
+        "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" },
+        "sources": { "$ref": "common_defs_schema.json#/$defs/sources" }
+      }
+    },
+    "content_detail": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_content_detail_id", "content", "sources"],
+      "properties": {
+        "contract_content_detail_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "content": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" },
+        "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" },
+        "sources": { "$ref": "common_defs_schema.json#/$defs/sources" }
+      }
+    },
+    "trigger": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "trigger_condition": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "trigger_events": { "type": "array", "items": { "$ref": "common_defs_schema.json#/$defs/registry_code" }, "uniqueItems": true },
+        "trigger_logic": { "type": ["string", "null"], "enum": ["and", "or", null] },
+        "offset_days": { "type": ["integer", "null"] },
+        "day_type": { "type": ["string", "null"], "enum": ["calendar_day", "working_day", null] }
+      }
+    },
+    "term_stage_base": {
+      "type": "object",
+      "properties": {
+        "description": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" },
+        "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" },
+        "percentage": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "due_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+        "trigger": { "$ref": "#/$defs/trigger" },
+        "sources": { "$ref": "common_defs_schema.json#/$defs/sources" }
+      }
+    },
+    "payment_stage": {
+      "allOf": [
+        { "$ref": "#/$defs/term_stage_base" },
+        { "type": "object", "additionalProperties": false, "required": ["payment_stage_id", "sources"], "properties": { "payment_stage_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "description": {}, "amount": {}, "currency": {}, "percentage": {}, "due_date": {}, "trigger": {}, "sources": {} } }
+      ]
+    },
+    "payment_term": {
+      "allOf": [
+        { "$ref": "#/$defs/term_stage_base" },
+        { "type": "object", "additionalProperties": false, "required": ["payment_term_id", "sources"], "properties": { "payment_term_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "description": {}, "amount": {}, "currency": {}, "percentage": {}, "due_date": {}, "trigger": {}, "sources": {}, "stages": { "type": "array", "items": { "$ref": "#/$defs/payment_stage" }, "minItems": 2 } } }
+      ]
+    },
+    "invoice_stage": {
+      "type": "object", "additionalProperties": false, "required": ["invoice_stage_id", "sources"],
+      "properties": { "invoice_stage_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "invoice_type": { "oneOf": [{ "$ref": "common_defs_schema.json#/$defs/registry_code" }, { "type": "null" }] }, "invoice_item": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "due_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "trigger": { "$ref": "#/$defs/trigger" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "invoice_term": {
+      "type": "object", "additionalProperties": false, "required": ["invoice_term_id", "sources"],
+      "properties": { "invoice_term_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "invoice_type": { "oneOf": [{ "$ref": "common_defs_schema.json#/$defs/registry_code" }, { "type": "null" }] }, "invoice_item": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "due_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "trigger": { "$ref": "#/$defs/trigger" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" }, "stages": { "type": "array", "items": { "$ref": "#/$defs/invoice_stage" }, "minItems": 2 } }
+    },
+    "performance_stage": {
+      "type": "object", "additionalProperties": false, "required": ["performance_stage_id", "sources"],
+      "properties": { "performance_stage_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "content": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "start_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "end_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "due_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "trigger": { "$ref": "#/$defs/trigger" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "performance_term": {
+      "type": "object", "additionalProperties": false, "required": ["performance_term_id", "sources"],
+      "properties": { "performance_term_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "content": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "start_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "end_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "due_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "trigger": { "$ref": "#/$defs/trigger" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" }, "stages": { "type": "array", "items": { "$ref": "#/$defs/performance_stage" }, "minItems": 2 } }
+    },
+    "acceptance_stage": {
+      "type": "object", "additionalProperties": false, "required": ["acceptance_stage_id", "sources"],
+      "properties": { "acceptance_stage_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "criteria": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "due_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "trigger": { "$ref": "#/$defs/trigger" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "acceptance_term": {
+      "type": "object", "additionalProperties": false, "required": ["acceptance_term_id", "sources"],
+      "properties": { "acceptance_term_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "criteria": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "due_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "trigger": { "$ref": "#/$defs/trigger" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" }, "stages": { "type": "array", "items": { "$ref": "#/$defs/acceptance_stage" }, "minItems": 2 } }
+    },
+    "clause_term": {
+      "type": "object", "additionalProperties": false, "required": ["term_id", "content", "sources"],
+      "properties": { "term_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "content": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "contract_fact_issue": {
+      "type": "object", "additionalProperties": false,
+      "required": ["issue_id", "target_path", "issue_type", "candidate_values", "source_file_ids"],
+      "properties": { "issue_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "target_path": { "$ref": "common_defs_schema.json#/$defs/json_pointer" }, "issue_type": { "enum": ["conflict", "ambiguous", "unreadable", "missing_referenced_document", "unresolved_amendment"] }, "candidate_values": { "type": "array", "items": {} }, "source_file_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" } }
+    },
+    "contract_fact_relation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["relation_id", "source_object_id", "target_object_id", "relation_type", "sources"],
+      "properties": { "relation_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "source_object_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "target_object_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "relation_type": { "$ref": "common_defs_schema.json#/$defs/registry_code" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    }
+  }
+}
