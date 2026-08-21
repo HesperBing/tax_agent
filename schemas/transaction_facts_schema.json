@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/transaction_facts_schema.json",
+  "title": "Transaction Facts Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "transaction_facts"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "transaction_facts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/transaction_fact" }
+    }
+  },
+  "$defs": {
+    "transaction_fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transaction_fact_id", "economic_substance_ref", "substance_code", "contract_fact_refs", "actual_fact_refs", "evidence_state_refs"],
+      "properties": {
+        "transaction_fact_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "economic_substance_ref": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "substance_code": { "oneOf": [{ "$ref": "common_defs_schema.json#/$defs/registry_code" }, { "type": "null" }] },
+        "contract_fact_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "actual_fact_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "evidence_state_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+      }
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/regulation_result_schema.json",
+  "title": "Regulation Result Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "regulation_results"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "regulation_results": { "type": "array", "items": { "$ref": "#/$defs/regulation_result" } }
+  },
+  "$defs": {
+    "deterministic_condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["condition_type", "fact_path", "operator", "expected_value"],
+      "properties": {
+        "condition_type": { "const": "deterministic_condition" },
+        "fact_path": { "$ref": "common_defs_schema.json#/$defs/json_pointer" },
+        "operator": { "enum": ["eq", "ne", "gt", "gte", "lt", "lte", "in", "not_in", "exists", "not_exists", "contains"] },
+        "expected_value": {}
+      }
+    },
+    "semantic_condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["condition_type", "condition_text"],
+      "properties": {
+        "condition_type": { "const": "semantic_condition" },
+        "condition_text": { "type": "string", "minLength": 1 }
+      }
+    },
+    "regulation_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["law_id", "title", "document_no", "article", "valid_from", "valid_to", "source", "citation_role"],
+      "properties": {
+        "law_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "title": { "type": "string", "minLength": 1 },
+        "document_no": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "issuer": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "article": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "valid_from": { "$ref": "common_defs_schema.json#/$defs/date" },
+        "valid_to": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+        "source": { "type": "string", "format": "uri" },
+        "citation_role": { "enum": ["binding_basis", "implementation_basis", "supporting_interpretation", "operational_guidance", "not_for_final_judgement"] },
+        "applicable_reason": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "retrieval_score": { "$ref": "common_defs_schema.json#/$defs/confidence" }
+      }
+    },
+    "regulation_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["regulation_result_id", "tax_type", "judgement_item", "applicable_date", "legal_condition_text", "legal_conditions", "value", "legal_basis_ids", "regulations", "resolution_status", "requires_manual_review"],
+      "properties": {
+        "regulation_result_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "tax_type": { "$ref": "common_defs_schema.json#/$defs/tax_type" },
+        "judgement_item": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "applicable_date": { "$ref": "common_defs_schema.json#/$defs/date" },
+        "date_source_field": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "date_confidence": { "$ref": "common_defs_schema.json#/$defs/confidence" },
+        "date_derivation_reason": { "$ref": "common_defs_schema.json#/$defs/nullable_string" },
+        "legal_condition_text": { "type": "string", "minLength": 1 },
+        "legal_conditions": {
+          "type": "array",
+          "items": { "oneOf": [{ "$ref": "#/$defs/deterministic_condition" }, { "$ref": "#/$defs/semantic_condition" }] }
+        },
+        "value": {},
+        "legal_basis_ids": { "$ref": "common_defs_schema.json#/$defs/legal_basis_ids" },
+        "regulations": { "type": "array", "items": { "$ref": "#/$defs/regulation_node" }, "minItems": 1 },
+        "conflict_detected": { "type": "boolean" },
+        "conflicting_law_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "resolution_status": { "enum": ["resolved", "needs_review"] },
+        "requires_manual_review": { "type": "boolean" }
+      }
+    }
+  }
+}

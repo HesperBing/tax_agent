@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/rule_schema.json",
+  "title": "Rule Configuration v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "atomic_rules", "evidence_requirement_groups", "risk_trigger_rules"],
+  "properties": {
+    "version": { "const": "v1.1" },
+    "atomic_rules": { "type": "array", "items": { "$ref": "#/$defs/atomic_rule" } },
+    "evidence_requirement_groups": { "type": "array", "items": { "$ref": "#/$defs/evidence_requirement_group" } },
+    "risk_trigger_rules": { "type": "array", "items": { "$ref": "#/$defs/risk_trigger_rule" } }
+  },
+  "$defs": {
+    "condition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["condition_id", "condition_type"],
+      "properties": {
+        "condition_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "condition_type": { "enum": ["deterministic_condition", "semantic_condition"] },
+        "fact_path": { "$ref": "common_defs_schema.json#/$defs/json_pointer" },
+        "operator": { "enum": ["eq", "ne", "gt", "gte", "lt", "lte", "in", "not_in", "exists", "not_exists", "contains"] },
+        "expected_value": {},
+        "condition_text": { "type": "string" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "condition_type": { "const": "deterministic_condition" } }, "required": ["condition_type"] },
+          "then": { "required": ["fact_path", "operator", "expected_value"] }
+        },
+        {
+          "if": { "properties": { "condition_type": { "const": "semantic_condition" } }, "required": ["condition_type"] },
+          "then": { "required": ["condition_text"] }
+        }
+      ]
+    },
+    "atomic_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rule_id", "rule_domain", "target_judgement_item", "conditions", "evidence_requirement_group_ids", "rule_result_status", "version"],
+      "properties": {
+        "rule_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "rule_domain": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "target_judgement_item": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "conditions": { "type": "array", "items": { "$ref": "#/$defs/condition" }, "minItems": 1 },
+        "evidence_requirement_group_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "rule_result_status": { "$ref": "common_defs_schema.json#/$defs/rule_result_status" },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidence_requirement_group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_requirement_group_id", "evidence_requirement_ids", "version"],
+      "properties": {
+        "evidence_requirement_group_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "evidence_requirement_ids": { "type": "array", "items": { "$ref": "common_defs_schema.json#/$defs/registry_code" }, "minItems": 1, "uniqueItems": true },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "risk_trigger_rule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["risk_trigger_rule_id", "pattern", "risk_event_type", "target_judgement_item", "guard_conditions", "version"],
+      "properties": {
+        "risk_trigger_rule_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "pattern": { "enum": ["expected_actual_mismatch", "amount_difference", "deadline_comparison", "obligation_not_performed", "incorrect_preference_application"] },
+        "risk_event_type": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "target_judgement_item": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "guard_conditions": { "type": "array", "items": { "$ref": "#/$defs/condition" }, "minItems": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/consistency_check_schema.json",
+  "title": "Consistency Check Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "consistency_checks"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "consistency_checks": { "type": "array", "items": { "$ref": "#/$defs/consistency_check" } }
+  },
+  "$defs": {
+    "consistency_check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["consistency_check_id", "contract_fact_refs", "actual_fact_refs", "comparison_item", "check_method", "status", "reason", "requires_review"],
+      "properties": {
+        "consistency_check_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "contract_fact_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "actual_fact_refs": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "comparison_item": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "check_method": { "enum": ["structured_check", "semantic_check"] },
+        "status": { "$ref": "common_defs_schema.json#/$defs/consistency_status" },
+        "contract_value": {},
+        "actual_value": {},
+        "aggregated_actual_value": {},
+        "reason": { "type": "string" },
+        "requires_review": { "type": "boolean" }
+      }
+    }
+  }
+}

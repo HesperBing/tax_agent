@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/evidence_schema.json",
+  "title": "Evidence Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "evidence_requirement_instances", "evidence_states"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "evidence_requirement_instances": { "type": "array", "items": { "$ref": "#/$defs/evidence_requirement_instance" } },
+    "evidence_states": { "type": "array", "items": { "$ref": "#/$defs/evidence_state_record" } }
+  },
+  "$defs": {
+    "evidence_requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_requirement_id", "purpose", "accepted_source_file_types", "configured_loss"],
+      "properties": {
+        "evidence_requirement_id": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "purpose": { "type": "string", "minLength": 1 },
+        "accepted_source_file_types": {
+          "type": "array",
+          "items": { "enum": ["invoice", "payment_receipt", "withholding_certificate", "tax_filing_material", "tax_payment_certificate", "acceptance_material", "delivery_material", "other"] },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "configured_loss": { "enum": [6, 8, 10, 12] }
+      }
+    },
+    "evidence_requirement_instance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_requirement_instance_id", "evidence_requirement_id", "target_object_id", "trigger_source_ids", "period_start", "period_end", "check_due_date"],
+      "properties": {
+        "evidence_requirement_instance_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "evidence_requirement_id": { "$ref": "common_defs_schema.json#/$defs/registry_code" },
+        "target_object_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "trigger_source_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "period_start": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+        "period_end": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+        "check_due_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }
+      }
+    },
+    "evidence_state_record": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_state_id", "evidence_requirement_instance_id", "state", "related_actual_fact_ids", "supporting_source_file_ids"],
+      "properties": {
+        "evidence_state_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "evidence_requirement_instance_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "state": { "$ref": "common_defs_schema.json#/$defs/evidence_state" },
+        "related_actual_fact_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" },
+        "supporting_source_file_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "state": { "const": "provided" } }, "required": ["state"] },
+          "then": { "properties": { "supporting_source_file_ids": { "minItems": 1 } } }
+        }
+      ]
+    }
+  }
+}

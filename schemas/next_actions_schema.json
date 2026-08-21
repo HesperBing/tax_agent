@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/next_actions_schema.json",
+  "title": "Next Actions Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tax_case_id", "next_actions"],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "next_actions": { "type": "array", "items": { "$ref": "#/$defs/next_action" } }
+  },
+  "$defs": {
+    "next_action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["next_action_id", "related_risk_event_id", "action", "priority", "legal_basis_ids", "fact_basis_ids"],
+      "properties": {
+        "next_action_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "related_risk_event_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+        "action": { "type": "string", "minLength": 1 },
+        "priority": { "$ref": "common_defs_schema.json#/$defs/risk_level" },
+        "legal_basis_ids": { "$ref": "common_defs_schema.json#/$defs/legal_basis_ids" },
+        "fact_basis_ids": { "$ref": "common_defs_schema.json#/$defs/fact_basis_ids" }
+      }
+    }
+  }
+}

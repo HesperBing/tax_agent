@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tax-agent.local/schemas/actual_facts_schema.json",
+  "title": "Actual Facts Module v1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "tax_case_id",
+    "actual_payments",
+    "actual_invoices",
+    "actual_performances",
+    "actual_acceptances",
+    "actual_settlements",
+    "actual_pricing_bases",
+    "actual_expenses",
+    "actual_adjustments",
+    "actual_agency_transactions",
+    "actual_withholdings",
+    "actual_tax_filings",
+    "actual_tax_payments",
+    "actual_tax_treatments",
+    "actual_obligation_states",
+    "actual_fact_relations",
+    "actual_fact_issues",
+    "duplicate_groups"
+  ],
+  "properties": {
+    "tax_case_id": { "$ref": "common_defs_schema.json#/$defs/identifier" },
+    "actual_payments": { "type": "array", "items": { "$ref": "#/$defs/actual_payment" } },
+    "actual_invoices": { "type": "array", "items": { "$ref": "#/$defs/actual_invoice" } },
+    "actual_performances": { "type": "array", "items": { "$ref": "#/$defs/actual_performance" } },
+    "actual_acceptances": { "type": "array", "items": { "$ref": "#/$defs/actual_acceptance" } },
+    "actual_settlements": { "type": "array", "items": { "$ref": "#/$defs/actual_settlement" } },
+    "actual_pricing_bases": { "type": "array", "items": { "$ref": "#/$defs/actual_pricing_basis" } },
+    "actual_expenses": { "type": "array", "items": { "$ref": "#/$defs/actual_expense" } },
+    "actual_adjustments": { "type": "array", "items": { "$ref": "#/$defs/actual_adjustment" } },
+    "actual_agency_transactions": { "type": "array", "items": { "$ref": "#/$defs/actual_agency_transaction" } },
+    "actual_withholdings": { "type": "array", "items": { "$ref": "#/$defs/actual_withholding" } },
+    "actual_tax_filings": { "type": "array", "items": { "$ref": "#/$defs/actual_tax_filing" } },
+    "actual_tax_payments": { "type": "array", "items": { "$ref": "#/$defs/actual_tax_payment" } },
+    "actual_tax_treatments": { "type": "array", "items": { "$ref": "#/$defs/actual_tax_treatment" } },
+    "actual_obligation_states": { "type": "array", "items": { "$ref": "#/$defs/actual_obligation_state" } },
+    "actual_fact_relations": { "type": "array", "items": { "$ref": "#/$defs/actual_fact_relation" } },
+    "actual_fact_issues": { "type": "array", "items": { "$ref": "#/$defs/actual_fact_issue" } },
+    "duplicate_groups": { "type": "array", "items": { "$ref": "#/$defs/duplicate_group" } }
+  },
+  "$defs": {
+    "event_base": {
+      "type": "object",
+      "properties": {
+        "event_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" },
+        "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" },
+        "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" },
+        "sources": { "$ref": "common_defs_schema.json#/$defs/sources" }
+      }
+    },
+    "actual_payment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_payment_id", "payment_date", "amount", "currency", "sources"],
+      "properties": { "actual_payment_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "payer": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "payee": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "payment_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "payment_method": { "oneOf": [{ "$ref": "common_defs_schema.json#/$defs/registry_code" }, { "type": "null" }] }, "transaction_reference": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "invoice_line": {
+      "type": "object", "additionalProperties": false,
+      "required": ["invoice_line_id", "invoice_item", "amount"],
+      "properties": { "invoice_line_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "invoice_item": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "tax_rate": { "type": ["number", "null"], "minimum": 0 } }
+    },
+    "actual_invoice": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_invoice_id", "invoice_date", "invoice_amount", "currency", "sources"],
+      "properties": { "actual_invoice_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "invoice_number": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "invoice_type": { "oneOf": [{ "$ref": "common_defs_schema.json#/$defs/registry_code" }, { "type": "null" }] }, "invoice_item": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "invoice_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "issuer": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "buyer": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "invoice_amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "invoice_lines": { "type": "array", "items": { "$ref": "#/$defs/invoice_line" } }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_performance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_performance_id", "performance_date", "content", "sources"],
+      "properties": { "actual_performance_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "performance_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "content": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "performer": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_acceptance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_acceptance_id", "acceptance_date", "result", "sources"],
+      "properties": { "actual_acceptance_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "acceptance_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "result": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "acceptance_document_number": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_settlement": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_settlement_id", "settlement_date", "amount", "currency", "sources"],
+      "properties": { "actual_settlement_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "settlement_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "description": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_pricing_basis": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_pricing_basis_id", "basis_type", "value", "sources"],
+      "properties": { "actual_pricing_basis_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "basis_type": { "$ref": "common_defs_schema.json#/$defs/registry_code" }, "value": {}, "unit": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "period_start": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "period_end": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_expense": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_expense_id", "expense_date", "amount", "currency", "sources"],
+      "properties": { "actual_expense_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "expense_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "expense_type": { "oneOf": [{ "$ref": "common_defs_schema.json#/$defs/registry_code" }, { "type": "null" }] }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "borne_by": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_adjustment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_adjustment_id", "adjustment_type", "adjustment_date", "amount", "currency", "sources"],
+      "properties": { "actual_adjustment_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "adjustment_type": { "$ref": "common_defs_schema.json#/$defs/registry_code" }, "adjustment_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "description": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_agency_transaction": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_agency_transaction_id", "transaction_type", "transaction_date", "amount", "currency", "sources"],
+      "properties": { "actual_agency_transaction_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "transaction_type": { "$ref": "common_defs_schema.json#/$defs/registry_code" }, "transaction_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "principal": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "agent": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_withholding": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_withholding_id", "tax_type", "withholding_date", "withheld_tax_amount", "currency", "sources"],
+      "properties": { "actual_withholding_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "tax_type": { "$ref": "common_defs_schema.json#/$defs/tax_type" }, "withholding_agent": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "taxpayer": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "withholding_basis": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "withholding_rate": { "type": ["number", "null"], "minimum": 0 }, "withheld_tax_amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "withholding_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "tax_period_start": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "tax_period_end": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_tax_filing": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_tax_filing_id", "tax_type", "tax_period_start", "tax_period_end", "filing_date", "sources"],
+      "properties": { "actual_tax_filing_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "tax_type": { "$ref": "common_defs_schema.json#/$defs/tax_type" }, "tax_period_start": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "tax_period_end": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "filing_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "declared_tax_amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "filing_reference": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_tax_payment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_tax_payment_id", "tax_type", "tax_period_start", "tax_period_end", "payment_date", "amount", "currency", "sources"],
+      "properties": { "actual_tax_payment_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "tax_type": { "$ref": "common_defs_schema.json#/$defs/tax_type" }, "tax_period_start": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "tax_period_end": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "payment_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "payment_reference": { "$ref": "common_defs_schema.json#/$defs/nullable_string" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_tax_treatment": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_tax_treatment_id", "tax_type", "treatment_item", "value", "tax_period_start", "tax_period_end", "sources"],
+      "properties": { "actual_tax_treatment_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "tax_type": { "$ref": "common_defs_schema.json#/$defs/tax_type" }, "treatment_item": { "enum": ["applicability", "taxpayer", "taxable_activity", "income_type", "tax_base_amount", "tax_rate", "levy_rate", "declared_tax_amount", "preference_type", "preference_applied", "preference_rate", "withholding_agent", "withholding_basis", "withholding_rate", "withheld_tax_amount", "tax_liability_date", "income_recognition_period", "withholding_date"] }, "value": {}, "tax_period_start": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "tax_period_end": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_obligation_state": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_obligation_state_id", "obligation_type", "state", "sources"],
+      "properties": { "actual_obligation_state_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "obligation_type": { "enum": ["tax_filing", "tax_payment", "withholding", "invoice_issuance"] }, "state": { "enum": ["confirmed_done", "confirmed_not_done"] }, "tax_type": { "$ref": "common_defs_schema.json#/$defs/tax_type" }, "tax_period_start": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "tax_period_end": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "actual_date": { "$ref": "common_defs_schema.json#/$defs/nullable_date" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_fact_relation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["relation_id", "actual_fact_id", "contract_fact_id", "relation_type", "allocated_amount", "currency", "sources"],
+      "properties": { "relation_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "actual_fact_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "contract_fact_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "relation_type": { "enum": ["actual_execution_of", "actual_tax_treatment_of", "actual_obligation_state_of"] }, "allocated_amount": { "$ref": "common_defs_schema.json#/$defs/nullable_nonnegative_number" }, "currency": { "$ref": "common_defs_schema.json#/$defs/nullable_currency" }, "sources": { "$ref": "common_defs_schema.json#/$defs/sources" } }
+    },
+    "actual_fact_issue": {
+      "type": "object", "additionalProperties": false,
+      "required": ["issue_id", "target_object_id", "target_path", "issue_type", "candidate_values", "source_file_ids", "blocking"],
+      "properties": { "issue_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "target_object_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "target_path": { "$ref": "common_defs_schema.json#/$defs/json_pointer" }, "issue_type": { "enum": ["conflict", "ambiguous", "unreadable", "possible_duplicate", "unresolved_relation"] }, "candidate_values": { "type": "array", "items": {} }, "source_file_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" }, "blocking": { "type": "boolean" } }
+    },
+    "duplicate_group": {
+      "type": "object", "additionalProperties": false,
+      "required": ["duplicate_group_id", "actual_fact_ids", "resolution_status"],
+      "properties": { "duplicate_group_id": { "$ref": "common_defs_schema.json#/$defs/identifier" }, "actual_fact_ids": { "$ref": "common_defs_schema.json#/$defs/id_array" }, "resolution_status": { "enum": ["unresolved", "resolved_same_event", "resolved_distinct_events"] }, "resolution_reason": { "$ref": "common_defs_schema.json#/$defs/nullable_string" } }
+    }
+  }
+}
