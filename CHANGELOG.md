@@ -57,3 +57,16 @@
 - 新增 Schema 设计决策说明和最小测试样例。
 - 新增 Schema 自动校验程序，11 项测试全部通过。
 - 后续需冻结各类 Registry、Risk Trigger Rules 和 Scoring Mapping。
+
+## Rule Engine v0.1 - 2026-08-21
+
+- 负责人：成员 C
+- 新增确定性 Python Rule Engine v0.1。
+- 实现 Rule ID 唯一性检查与精确匹配。
+- 实现 Atomic Rule 执行与 Judgement Resolution。
+- 实现 Tax Health Score、Evidence Coverage 和 Risk Level 计算。
+- 实现 Risk Codes 汇总以及 unknown、pending、Evidence Gaps 分流。
+- 新增 Transaction Facts、Regulation Result、Tax Judgement、Rule Engine Input 和 Rule Engine Output Mock。
+- 新增风险、评分和证据辅助 Mock。
+- Rule Engine 17项测试全部通过，原Schema 11项测试继续通过。
+- 后续需补全正式Atomic Rules和Risk Trigger Rules。

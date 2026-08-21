@@ -1,0 +1,10 @@
+{
+  "tax_case_id": "CASE_RULE_MOCK_001",
+  "transaction_fact_refs": ["TRANSACTION_MOCK_001"],
+  "economic_substance_refs": ["SUBSTANCE_MOCK_001"],
+  "consistency_check_refs": [],
+  "regulation_result_refs": ["REGULATION_MOCK_001"],
+  "evidence_state_refs": ["EVIDENCE_STATE_MOCK_001"],
+  "actual_tax_filing_refs": [],
+  "actual_tax_payment_refs": []
+}

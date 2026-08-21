@@ -4,6 +4,7 @@
 
 当前统一规范版本：`v0.6`
 当前 JSON Schema 版本：`v1.1`
+当前 Rule Engine 版本：`v0.1`
 
 ## 项目简介
 
@@ -109,16 +110,21 @@ API配置通过本地`.env`文件读取，仓库只提供`.env.example`作为配
 - Dify Workflow v0.6技术规划
 - DeepSeek API环境准备和连接测试
 - JSON Schema v1.1核心数据结构
-- Schema设计决策和最小测试样例
 - Schema自动校验，11项测试全部通过
+- Rule Engine v0.1确定性执行框架
+- Rule ID匹配、Atomic Rule执行和Judgement Resolution
+- Tax Health Score、Evidence Coverage和Risk Level计算
+- Risk Codes汇总
+- unknown、pending和Evidence Gaps分流
+- Rule Engine及辅助Mock数据
+- Rule Engine 17项测试全部通过
 
 后续工作：
 
-- 冻结各类Registry
-- 编写Rule Engine
-- 编写Risk Trigger Rules
-- 编写评分Mapping Tables
-- 准备Mock JSON
+- 冻结并补全正式Atomic Rules
+- 冻结其余正式Registry
+- 实现完整Risk Trigger Rules
+- 完善评分Mapping Tables
 - 建立Golden Test自动化
 - 完成Dify与Rule Engine联调
 
@@ -129,3 +135,4 @@ API配置通过本地`.env`文件读取，仓库只提供`.env.example`作为配
 - Dify规划：`dify/workflow_plan_v0_6.md`
 - Schema设计决策：`docs/schema_v1_1_decisions.md`
 - Schema文件说明：`schemas/README.md`
+- Rule Engine技术说明：`docs/rule_engine_v0_1.md`

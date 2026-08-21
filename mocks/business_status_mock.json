@@ -1,0 +1,14 @@
+{
+  "items": [
+    {
+      "item_id": "FILING_STAGE_MOCK_001",
+      "status": "pending",
+      "text": "申报检查时点尚未到达"
+    },
+    {
+      "item_id": "WITHHOLDING_CONFIRMATION_MOCK_001",
+      "status": "unknown",
+      "text": "现有证据无法确认是否已经完成扣缴"
+    }
+  ]
+}

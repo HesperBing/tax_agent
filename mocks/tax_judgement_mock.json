@@ -1,0 +1,61 @@
+{
+  "tax_case_id": "CASE_RULE_MOCK_001",
+  "judgement_status": "partial",
+  "withholding_obligation": {
+    "status": "partial",
+    "applicability": {
+      "status": "confirmed",
+      "value": true,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["TRANSACTION_MOCK_001"]
+    },
+    "withholding_agent": {
+      "status": "confirmed",
+      "value": "domestic_enterprise",
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["CONTRACT_PARTY_MOCK_001"]
+    },
+    "withheld_tax_type": {
+      "status": "confirmed",
+      "value": "individual_income_tax",
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["TRANSACTION_MOCK_001"]
+    },
+    "withholding_basis": {
+      "status": "unknown",
+      "value": null,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["ACTUAL_PAYMENT_MOCK_001"]
+    },
+    "withholding_rate": {
+      "status": "unknown",
+      "value": null,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["ACTUAL_PAYMENT_MOCK_001"]
+    },
+    "filing_obligation": {
+      "status": "confirmed",
+      "value": true,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["TRANSACTION_MOCK_001"]
+    },
+    "payment_obligation": {
+      "status": "confirmed",
+      "value": true,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["TRANSACTION_MOCK_001"]
+    },
+    "filing_deadline": {
+      "status": "unknown",
+      "value": null,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["ACTUAL_PAYMENT_MOCK_001"]
+    },
+    "payment_deadline": {
+      "status": "unknown",
+      "value": null,
+      "legal_basis_ids": ["LAW_IIT_003"],
+      "fact_basis_ids": ["ACTUAL_PAYMENT_MOCK_001"]
+    }
+  }
+}

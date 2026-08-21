@@ -1,0 +1,17 @@
+{
+  "version": "v0.1",
+  "requirements": [
+    {"evidence_requirement_id": "performance_evidence", "purpose": "证明服务、交付或履约实际发生", "accepted_source_file_types": ["delivery_material", "acceptance_material", "other"], "configured_loss": 12},
+    {"evidence_requirement_id": "acceptance_evidence", "purpose": "证明合同约定验收是否完成及结果", "accepted_source_file_types": ["acceptance_material"], "configured_loss": 12},
+    {"evidence_requirement_id": "payment_evidence", "purpose": "证明实际付款发生、金额、日期及归属", "accepted_source_file_types": ["payment_receipt"], "configured_loss": 8},
+    {"evidence_requirement_id": "invoice_evidence", "purpose": "证明实际开票行为及发票内容", "accepted_source_file_types": ["invoice"], "configured_loss": 8},
+    {"evidence_requirement_id": "settlement_evidence", "purpose": "证明实际结算及确认结果", "accepted_source_file_types": ["payment_receipt", "other"], "configured_loss": 10},
+    {"evidence_requirement_id": "pricing_basis_evidence", "purpose": "证明浮动或公式定价依赖的实际业务基数", "accepted_source_file_types": ["other"], "configured_loss": 12},
+    {"evidence_requirement_id": "expense_evidence", "purpose": "证明实际费用发生及承担", "accepted_source_file_types": ["payment_receipt", "other"], "configured_loss": 6},
+    {"evidence_requirement_id": "adjustment_evidence", "purpose": "证明折扣、返利、退款或价格调整实际发生", "accepted_source_file_types": ["other"], "configured_loss": 8},
+    {"evidence_requirement_id": "agency_transaction_evidence", "purpose": "证明代理、代收或代付的实际执行", "accepted_source_file_types": ["payment_receipt", "other"], "configured_loss": 10},
+    {"evidence_requirement_id": "withholding_evidence", "purpose": "证明代扣行为、税种、基数和税额", "accepted_source_file_types": ["withholding_certificate", "tax_filing_material"], "configured_loss": 10},
+    {"evidence_requirement_id": "tax_filing_evidence", "purpose": "证明相关税种申报执行", "accepted_source_file_types": ["tax_filing_material"], "configured_loss": 8},
+    {"evidence_requirement_id": "tax_payment_evidence", "purpose": "证明相关税款缴纳执行", "accepted_source_file_types": ["tax_payment_certificate"], "configured_loss": 10}
+  ]
+}

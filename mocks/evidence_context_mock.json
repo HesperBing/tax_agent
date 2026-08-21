@@ -1,0 +1,55 @@
+{
+  "tax_case_id": "CASE_RULE_MOCK_001",
+  "evidence_requirement_instances": [
+    {
+      "evidence_requirement_instance_id": "ERI_PERFORMANCE_MOCK_001",
+      "evidence_requirement_id": "performance_evidence",
+      "target_object_id": "TRANSACTION_MOCK_001",
+      "trigger_source_ids": ["RULE_IIT_WITHHOLDING_APPLICABILITY_001"],
+      "period_start": "2026-08-01",
+      "period_end": "2026-08-31",
+      "check_due_date": "2026-08-31"
+    },
+    {
+      "evidence_requirement_instance_id": "ERI_PAYMENT_MOCK_001",
+      "evidence_requirement_id": "payment_evidence",
+      "target_object_id": "ACTUAL_PAYMENT_MOCK_001",
+      "trigger_source_ids": ["RULE_IIT_WITHHOLDING_APPLICABILITY_001"],
+      "period_start": "2026-08-01",
+      "period_end": "2026-08-31",
+      "check_due_date": "2026-08-31"
+    },
+    {
+      "evidence_requirement_instance_id": "ERI_INVOICE_MOCK_001",
+      "evidence_requirement_id": "invoice_evidence",
+      "target_object_id": "TRANSACTION_MOCK_001",
+      "trigger_source_ids": ["RULE_IIT_WITHHOLDING_APPLICABILITY_001"],
+      "period_start": "2026-08-01",
+      "period_end": "2026-08-31",
+      "check_due_date": "2026-08-31"
+    }
+  ],
+  "evidence_states": [
+    {
+      "evidence_state_id": "ES_PERFORMANCE_MOCK_001",
+      "evidence_requirement_instance_id": "ERI_PERFORMANCE_MOCK_001",
+      "state": "missing",
+      "related_actual_fact_ids": [],
+      "supporting_source_file_ids": []
+    },
+    {
+      "evidence_state_id": "ES_PAYMENT_MOCK_001",
+      "evidence_requirement_instance_id": "ERI_PAYMENT_MOCK_001",
+      "state": "unknown",
+      "related_actual_fact_ids": ["ACTUAL_PAYMENT_MOCK_001"],
+      "supporting_source_file_ids": ["FILE_PAYMENT_MOCK_001"]
+    },
+    {
+      "evidence_state_id": "ES_INVOICE_MOCK_001",
+      "evidence_requirement_instance_id": "ERI_INVOICE_MOCK_001",
+      "state": "provided",
+      "related_actual_fact_ids": ["ACTUAL_INVOICE_MOCK_001"],
+      "supporting_source_file_ids": ["FILE_INVOICE_MOCK_001"]
+    }
+  ]
+}
