@@ -1,0 +1,1021 @@
+app:
+  description: 合同税务健康评分与大模型税务助手主工作流
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: Tax Agent Main Workflow v0.1
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.20@850efe73fb62bbe7ab2229116086596596297a77174fb86f73e1363b99a24116
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        knowledge_file_size_limit: 50
+        single_chunk_attachment_limit: 10
+        skill_file_size_limit: 50
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1787738395307-source-1787739990409-target
+      selected: false
+      source: '1787738395307'
+      sourceHandle: source
+      target: '1787739990409'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: iteration
+      id: 1787739990409-source-1787740938854-target
+      selected: false
+      source: '1787739990409'
+      sourceHandle: source
+      target: '1787740938854'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1787740938854'
+        sourceType: iteration-start
+        targetType: llm
+      id: 1787740938854start-source-1787742486092-target
+      selected: false
+      source: 1787740938854start
+      sourceHandle: source
+      target: '1787742486092'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: iteration
+        targetType: code
+      id: 1787740938854-source-1787745659893-target
+      selected: false
+      source: '1787740938854'
+      sourceHandle: source
+      target: '1787745659893'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1787745659893-source-1787747784468-target
+      selected: false
+      source: '1787745659893'
+      sourceHandle: source
+      target: '1787747784468'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1787747784468-true-1787748123732-target
+      selected: false
+      source: '1787747784468'
+      sourceHandle: 'true'
+      target: '1787748123732'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1787747784468-false-1787794997135-target
+      selected: false
+      source: '1787747784468'
+      sourceHandle: 'false'
+      target: '1787794997135'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1787794997135-source-1787796773852-target
+      selected: false
+      source: '1787794997135'
+      sourceHandle: source
+      target: '1787796773852'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1787796773852-source-1787797443833-target
+      selected: false
+      source: '1787796773852'
+      sourceHandle: source
+      target: '1787797443833'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1787797443833-source-1787798299682-target
+      selected: false
+      source: '1787797443833'
+      sourceHandle: source
+      target: '1787798299682'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1787798299682-source-1787799955734-target
+      selected: false
+      source: '1787798299682'
+      sourceHandle: source
+      target: '1787799955734'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1787799955734-source-1787822187854-target
+      source: '1787799955734'
+      sourceHandle: source
+      target: '1787822187854'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          default: ''
+          hide: false
+          hint: ''
+          label: 上传税务文件
+          max_length: 5
+          options: []
+          placeholder: ''
+          required: true
+          type: file-list
+          variable: uploaded_files
+      height: 107
+      id: '1787738395307'
+      position:
+        x: 0
+        y: 40.35000000000004
+      positionAbsolute:
+        x: 0
+        y: 40.35000000000004
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        is_array_file: true
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - '1787738395307'
+        - uploaded_files
+      height: 102
+      id: '1787739990409'
+      position:
+        x: 342
+        y: 60.683333333333366
+      positionAbsolute:
+        x: 342
+        y: 60.683333333333366
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        error_handle_mode: terminated
+        flatten_output: true
+        height: 206
+        is_parallel: false
+        iterator_input_type: array[string]
+        iterator_selector:
+        - '1787739990409'
+        - text
+        output_selector:
+        - '1787742486092'
+        - structured_output
+        output_type: array[object]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1787740938854start
+        title: 迭代
+        type: iteration
+        width: 485
+      height: 206
+      id: '1787740938854'
+      position:
+        x: 683
+        y: 25.683333333333366
+      positionAbsolute:
+        x: 683
+        y: 25.683333333333366
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 485
+      zIndex: 0
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1787740938854start
+      parentId: '1787740938854'
+      position:
+        x: 60
+        y: 71
+      positionAbsolute:
+        x: 743
+        y: 96.68333333333337
+      selectable: false
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1001
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1787740938854'
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-flash
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: b353f845-3a91-4bd9-909f-6e549fae26da
+          role: system
+          text: '你是 Tax Agent 的文件分类节点。
+
+
+            你的任务是根据当前文件正文判断文件类型。只能使用下列 source_file_type：
+
+
+            contract
+
+            invoice
+
+            payment_receipt
+
+            withholding_certificate
+
+            tax_filing_material
+
+            tax_payment_certificate
+
+            acceptance_material
+
+            delivery_material
+
+            other
+
+
+            如果 source_file_type 为 contract，还必须判断 contract_document_role，只能使用：
+
+
+            main_contract
+
+            supplementary_agreement
+
+            amendment_agreement
+
+
+            分类规则：
+
+
+            1. 只能根据文件正文分类，不得猜测正文中不存在的信息。
+
+            2. 非合同文件的 contract_document_role 必须为 null。
+
+            3. 如果能够可靠分类，classification_status 为 success。
+
+            4. 如果正文为空、内容不足或无法可靠分类，classification_status 为 failed，source_file_type
+            和 contract_document_role 均为 null。
+
+            5. “other”表示能够确定文件不属于前面八类，不代表分类失败。
+
+            6. 输出必须是合法 JSON，不要输出 Markdown、解释文字或代码块。'
+        - id: b4422351-35eb-4c8b-b5ad-e1b013f7a419
+          role: user
+          text: 请分类下面这份文件：{{#1787740938854.item#}}
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              classification_status:
+                description: 文件分类状态
+                enum:
+                - success
+                - failed
+                type: string
+              contract_document_role:
+                description: 合同文件角色，非合同文件或分类失败时为null
+                enum:
+                - main_contract
+                - supplementary_agreement
+                - amendment_agreement
+                - null
+                type:
+                - string
+                - 'null'
+              source_file_type:
+                description: 文件类型，分类失败时为null
+                enum:
+                - contract
+                - invoice
+                - payment_receipt
+                - withholding_certificate
+                - tax_filing_material
+                - tax_payment_certificate
+                - acceptance_material
+                - delivery_material
+                - other
+                - null
+                type:
+                - string
+                - 'null'
+            required:
+            - classification_status
+            - source_file_type
+            - contract_document_role
+            type: object
+        structured_output_enabled: true
+        title: 文件分类器
+        type: llm
+        vision:
+          enabled: false
+      height: 86
+      id: '1787742486092'
+      parentId: '1787740938854'
+      position:
+        x: 184
+        y: 60
+      positionAbsolute:
+        x: 867
+        y: 85.68333333333337
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        code: "def main(texts: list, classifications: list) -> dict:\n    allowed_file_types\
+          \ = {\n        \"contract\",\n        \"invoice\",\n        \"payment_receipt\"\
+          ,\n        \"withholding_certificate\",\n        \"tax_filing_material\"\
+          ,\n        \"tax_payment_certificate\",\n        \"acceptance_material\"\
+          ,\n        \"delivery_material\",\n        \"other\",\n    }\n\n    allowed_contract_roles\
+          \ = {\n        \"main_contract\",\n        \"supplementary_agreement\",\n\
+          \        \"amendment_agreement\",\n    }\n\n    if not isinstance(texts,\
+          \ list):\n        texts = []\n\n    if not isinstance(classifications, list):\n\
+          \        classifications = []\n\n    valid_documents = []\n    validation_errors\
+          \ = []\n\n    total_count = max(len(texts), len(classifications))\n\n  \
+          \  for index in range(total_count):\n        text = texts[index] if index\
+          \ < len(texts) else \"\"\n        classification = (\n            classifications[index]\n\
+          \            if index < len(classifications)\n            and isinstance(classifications[index],\
+          \ dict)\n            else {}\n        )\n\n        status = classification.get(\"\
+          classification_status\")\n        source_file_type = classification.get(\"\
+          source_file_type\")\n        contract_document_role = classification.get(\"\
+          contract_document_role\")\n\n        error_codes = []\n\n        if not\
+          \ isinstance(text, str) or not text.strip():\n            error_codes.append(\"\
+          EMPTY_EXTRACTED_TEXT\")\n\n        if not classification:\n            error_codes.append(\"\
+          MISSING_CLASSIFICATION_RESULT\")\n        else:\n            if status not\
+          \ in {\"success\", \"failed\"}:\n                error_codes.append(\"INVALID_CLASSIFICATION_STATUS\"\
+          )\n\n            if status == \"success\":\n                if source_file_type\
+          \ not in allowed_file_types:\n                    error_codes.append(\"\
+          INVALID_SOURCE_FILE_TYPE\")\n\n                if source_file_type == \"\
+          contract\":\n                    if contract_document_role not in allowed_contract_roles:\n\
+          \                        error_codes.append(\"INVALID_CONTRACT_DOCUMENT_ROLE\"\
+          )\n                elif contract_document_role is not None:\n          \
+          \          error_codes.append(\"UNEXPECTED_CONTRACT_DOCUMENT_ROLE\")\n\n\
+          \            if status == \"failed\":\n                error_codes.append(\"\
+          CLASSIFICATION_FAILED\")\n\n                if source_file_type is not None:\n\
+          \                    error_codes.append(\"FAILED_TYPE_MUST_BE_NULL\")\n\n\
+          \                if contract_document_role is not None:\n              \
+          \      error_codes.append(\"FAILED_ROLE_MUST_BE_NULL\")\n\n        if error_codes:\n\
+          \            validation_errors.append(\n                {\n            \
+          \        \"file_index\": index,\n                    \"error_codes\": error_codes,\n\
+          \                }\n            )\n        else:\n            valid_documents.append(\n\
+          \                {\n                    \"file_index\": index,\n       \
+          \             \"document_text\": text,\n                    \"classification_status\"\
+          : status,\n                    \"source_file_type\": source_file_type,\n\
+          \                    \"contract_document_role\": contract_document_role,\n\
+          \                }\n            )\n\n    return {\n        \"valid_documents\"\
+          : valid_documents,\n        \"validation_errors\": validation_errors,\n\
+          \        \"has_errors\": len(validation_errors) > 0,\n        \"total_count\"\
+          : total_count,\n        \"valid_count\": len(valid_documents),\n       \
+          \ \"error_count\": len(validation_errors),\n    }"
+        code_language: python3
+        outputs:
+          error_count:
+            children: null
+            type: number
+          has_errors:
+            children: null
+            type: boolean
+          total_count:
+            children: null
+            type: number
+          valid_count:
+            children: null
+            type: number
+          valid_documents:
+            children: null
+            type: array[object]
+          validation_errors:
+            children: null
+            type: array[object]
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1787739990409'
+          - text
+          value_type: array[string]
+          variable: texts
+        - value_selector:
+          - '1787740938854'
+          - output
+          value_type: array[object]
+          variable: classifications
+      height: 50
+      id: '1787745659893'
+      position:
+        x: 1268
+        y: 138.01666666666668
+      positionAbsolute:
+        x: 1268
+        y: 138.01666666666668
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 3505f5c7-e410-47a6-ab0f-05076ea0ca8c
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1787745659893'
+            - has_errors
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 122
+      id: '1787747784468'
+      position:
+        x: 1609
+        y: 110.35000000000002
+      positionAbsolute:
+        x: 1609
+        y: 110.35000000000002
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1787745659893'
+          - validation_errors
+          value_type: array[object]
+          variable: validation_errors
+        - value_selector:
+          - '1787745659893'
+          - has_errors
+          value_type: boolean
+          variable: has_errors
+        - value_selector:
+          - '1787745659893'
+          - total_count
+          value_type: number
+          variable: total_count
+        - value_selector:
+          - '1787745659893'
+          - valid_count
+          value_type: number
+          variable: valid_count
+        - value_selector:
+          - '1787745659893'
+          - error_count
+          value_type: number
+          variable: error_count
+        selected: false
+        title: 最终异常输出
+        type: end
+      height: 191
+      id: '1787748123732'
+      position:
+        x: 1970
+        y: 0
+      positionAbsolute:
+        x: 1970
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(valid_documents: list) -> dict:\n    if not isinstance(valid_documents,\
+          \ list):\n        valid_documents = []\n\n    return {\n        \"source_documents\"\
+          : valid_documents,\n        \"contract_facts\": {},\n        \"actual_facts\"\
+          : {},\n        \"evidence_state\": {},\n        \"economic_substance\":\
+          \ {},\n        \"facts_status\": \"waiting_for_facts_nodes\"\n    }"
+        code_language: python3
+        outputs:
+          actual_facts:
+            children: null
+            type: object
+          contract_facts:
+            children: null
+            type: object
+          economic_substance:
+            children: null
+            type: object
+          evidence_state:
+            children: null
+            type: object
+          facts_status:
+            children: null
+            type: string
+          source_documents:
+            children: null
+            type: array[object]
+        selected: false
+        title: Facts 接入占位
+        type: code
+        variables:
+        - value_selector:
+          - '1787745659893'
+          - valid_documents
+          value_type: array[object]
+          variable: valid_documents
+      height: 50
+      id: '1787794997135'
+      position:
+        x: 1970
+        y: 271
+      positionAbsolute:
+        x: 1970
+        y: 271
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(\n    contract_facts: dict,\n    actual_facts: dict,\n   \
+          \ evidence_state: dict,\n    economic_substance: dict\n) -> dict:\n    tax_case_id\
+          \ = \"TaxCase.DifyPlaceholder\"\n    transaction_facts = []\n\n    payload\
+          \ = {\n        \"tax_case_id\": tax_case_id,\n        \"transaction_facts\"\
+          : transaction_facts\n    }\n\n    return {\n        \"tax_case_id\": tax_case_id,\n\
+          \        \"transaction_facts\": transaction_facts,\n        \"transaction_facts_payload\"\
+          : payload,\n        \"transaction_facts_status\": \"waiting_for_facts_nodes\"\
+          \n    }"
+        code_language: python3
+        outputs:
+          tax_case_id:
+            children: null
+            type: string
+          transaction_facts:
+            children: null
+            type: array[object]
+          transaction_facts_payload:
+            children: null
+            type: object
+          transaction_facts_status:
+            children: null
+            type: string
+        selected: false
+        title: Transaction Facts 合并占位
+        type: code
+        variables:
+        - value_selector:
+          - '1787794997135'
+          - contract_facts
+          value_type: object
+          variable: contract_facts
+        - value_selector:
+          - '1787794997135'
+          - actual_facts
+          value_type: object
+          variable: actual_facts
+        - value_selector:
+          - '1787794997135'
+          - evidence_state
+          value_type: object
+          variable: evidence_state
+        - value_selector:
+          - '1787794997135'
+          - economic_substance
+          value_type: object
+          variable: economic_substance
+      height: 50
+      id: '1787796773852'
+      position:
+        x: 2311
+        y: 279.33333333333337
+      positionAbsolute:
+        x: 2311
+        y: 279.33333333333337
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(transaction_facts_payload: dict) -> dict:\n    if not isinstance(transaction_facts_payload,\
+          \ dict):\n        transaction_facts_payload = {}\n\n    tax_case_id = (\n\
+          \        transaction_facts_payload.get(\"tax_case_id\")\n        or \"TaxCase.DifyPlaceholder\"\
+          \n    )\n\n    # 等待其他成员完成真实知识库和 Temporal RAG\n    regulation_results = []\n\
+          \n    regulation_result_payload = {\n        \"tax_case_id\": tax_case_id,\n\
+          \        \"regulation_results\": regulation_results\n    }\n\n    return\
+          \ {\n        \"regulation_results\": regulation_results,\n        \"regulation_result_payload\"\
+          : regulation_result_payload,\n        \"knowledge_retrieval_status\": \"\
+          waiting_for_knowledge_retrieval\"\n    }"
+        code_language: python3
+        outputs:
+          knowledge_retrieval_status:
+            children: null
+            type: string
+          regulation_result_payload:
+            children: null
+            type: object
+          regulation_results:
+            children: null
+            type: array[object]
+        selected: false
+        title: Knowledge Retrieval 接入占位
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts_payload
+          value_type: object
+          variable: transaction_facts_payload
+      height: 50
+      id: '1787797443833'
+      position:
+        x: 2652
+        y: 287.6666666666667
+      positionAbsolute:
+        x: 2652
+        y: 287.6666666666667
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(\n    transaction_facts_payload: dict,\n    regulation_result_payload:\
+          \ dict\n) -> dict:\n    if not isinstance(transaction_facts_payload, dict):\n\
+          \        transaction_facts_payload = {}\n\n    if not isinstance(regulation_result_payload,\
+          \ dict):\n        regulation_result_payload = {}\n\n    tax_case_id = (\n\
+          \        regulation_result_payload.get(\"tax_case_id\")\n        or transaction_facts_payload.get(\"\
+          tax_case_id\")\n        or \"TaxCase.DifyPlaceholder\"\n    )\n\n    tax_judgement_payload\
+          \ = {\n        \"tax_case_id\": tax_case_id,\n        \"judgement_status\"\
+          : \"unknown\"\n    }\n\n    return {\n        \"tax_judgement_payload\"\
+          : tax_judgement_payload,\n        \"judgement_status\": \"unknown\",\n \
+          \       \"tax_judgement_node_status\": \"waiting_for_tax_judgement_node\"\
+          \n    }"
+        code_language: python3
+        outputs:
+          judgement_status:
+            children: null
+            type: string
+          tax_judgement_node_status:
+            children: null
+            type: string
+          tax_judgement_payload:
+            children: null
+            type: object
+        selected: false
+        title: Tax Judgement 接入占位
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts_payload
+          value_type: object
+          variable: transaction_facts_payload
+        - value_selector:
+          - '1787797443833'
+          - regulation_result_payload
+          value_type: object
+          variable: regulation_result_payload
+      height: 50
+      id: '1787798299682'
+      position:
+        x: 2993
+        y: 296
+      positionAbsolute:
+        x: 2993
+        y: 296
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "import json\n\ndef main(tax_case_id: str, transaction_facts: list,\
+          \ regulation_results: list, tax_judgement_payload: dict, economic_substance:\
+          \ dict, evidence_state: dict) -> dict:\n    transaction_facts = transaction_facts\
+          \ if isinstance(transaction_facts, list) else []\n    regulation_results\
+          \ = regulation_results if isinstance(regulation_results, list) else []\n\
+          \    tax_judgement_payload = tax_judgement_payload if isinstance(tax_judgement_payload,\
+          \ dict) else {}\n    economic_substance = economic_substance if isinstance(economic_substance,\
+          \ dict) else {}\n    evidence_state = evidence_state if isinstance(evidence_state,\
+          \ dict) else {}\n\n    case_id = tax_case_id or tax_judgement_payload.get(\"\
+          tax_case_id\") or \"TaxCase.DifyPlaceholder\"\n\n    transaction_fact_refs\
+          \ = []\n    for item in transaction_facts:\n        if isinstance(item,\
+          \ dict) and item.get(\"transaction_fact_id\"):\n            transaction_fact_refs.append(item.get(\"\
+          transaction_fact_id\"))\n\n    regulation_result_refs = []\n    for item\
+          \ in regulation_results:\n        if isinstance(item, dict) and item.get(\"\
+          regulation_result_id\"):\n            regulation_result_refs.append(item.get(\"\
+          regulation_result_id\"))\n\n    rule_engine_input = {\n        \"tax_case_id\"\
+          : case_id,\n        \"transaction_fact_refs\": transaction_fact_refs,\n\
+          \        \"economic_substance_refs\": [],\n        \"consistency_check_refs\"\
+          : [],\n        \"regulation_result_refs\": regulation_result_refs,\n   \
+          \     \"evidence_state_refs\": [],\n        \"actual_tax_filing_refs\":\
+          \ [],\n        \"actual_tax_payment_refs\": []\n    }\n\n    rule_engine_output\
+          \ = {\n        \"tax_case_id\": case_id,\n        \"rule_execution_results\"\
+          : [],\n        \"judgement_resolution_results\": []\n    }\n\n    if transaction_facts\
+          \ and regulation_results and tax_judgement_payload and economic_substance\
+          \ and evidence_state:\n        rule_engine_status = \"waiting_for_formal_rules\"\
+          \n    else:\n        rule_engine_status = \"waiting_for_upstream_nodes\"\
+          \n\n    score_preview = {\n        \"tax_case_id\": case_id,\n        \"\
+          tax_health_score\": None,\n        \"total_health_score_loss\": None,\n\
+          \        \"final_risk_event_ids\": [],\n        \"calculation_status\":\
+          \ rule_engine_status\n    }\n\n    evidence_coverage_preview = {\n     \
+          \   \"tax_case_id\": case_id,\n        \"evidence_coverage\": None,\n  \
+          \      \"total_evidence_coverage_loss\": None,\n        \"evidence_loss_details\"\
+          : [],\n        \"calculation_status\": rule_engine_status\n    }\n\n   \
+          \ score_preview_text = json.dumps(score_preview, ensure_ascii=False)\n \
+          \   evidence_coverage_preview_text = json.dumps(evidence_coverage_preview,\
+          \ ensure_ascii=False)\n\n    return {\n        \"rule_engine_input\": rule_engine_input,\n\
+          \        \"rule_engine_output\": rule_engine_output,\n        \"score_preview\"\
+          : score_preview,\n        \"evidence_coverage_preview\": evidence_coverage_preview,\n\
+          \        \"risk_level\": \"unknown\",\n        \"risk_codes\": [],\n   \
+          \     \"evidence_gaps\": [],\n        \"rule_engine_status\": rule_engine_status,\n\
+          \        \"score_preview_text\": score_preview_text,\n        \"evidence_coverage_preview_text\"\
+          : evidence_coverage_preview_text\n    }"
+        code_language: python3
+        outputs:
+          evidence_coverage_preview:
+            children: null
+            type: object
+          evidence_coverage_preview_text:
+            children: null
+            type: string
+          evidence_gaps:
+            children: null
+            type: array[object]
+          risk_codes:
+            children: null
+            type: array[string]
+          risk_level:
+            children: null
+            type: string
+          rule_engine_input:
+            children: null
+            type: object
+          rule_engine_output:
+            children: null
+            type: object
+          rule_engine_status:
+            children: null
+            type: string
+          score_preview:
+            children: null
+            type: object
+          score_preview_text:
+            children: null
+            type: string
+        selected: false
+        title: Rule Engine 接入占位
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - tax_case_id
+          value_type: string
+          variable: tax_case_id
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts
+          value_type: array[object]
+          variable: transaction_facts
+        - value_selector:
+          - '1787797443833'
+          - regulation_results
+          value_type: array[object]
+          variable: regulation_results
+        - value_selector:
+          - '1787798299682'
+          - tax_judgement_payload
+          value_type: object
+          variable: tax_judgement_payload
+        - value_selector:
+          - '1787794997135'
+          - economic_substance
+          value_type: object
+          variable: economic_substance
+        - value_selector:
+          - '1787794997135'
+          - evidence_state
+          value_type: object
+          variable: evidence_state
+      height: 50
+      id: '1787799955734'
+      position:
+        x: 3334
+        y: 304.33333333333337
+      positionAbsolute:
+        x: 3334
+        y: 304.33333333333337
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1787799955734'
+          - risk_level
+          value_type: string
+          variable: risk_level
+        - value_selector:
+          - '1787799955734'
+          - risk_codes
+          value_type: array[string]
+          variable: risk_codes
+        - value_selector:
+          - '1787799955734'
+          - evidence_gaps
+          value_type: array[object]
+          variable: evidence_gaps
+        - value_selector:
+          - '1787799955734'
+          - rule_engine_status
+          value_type: string
+          variable: rule_engine_status
+        - value_selector:
+          - '1787799955734'
+          - score_preview_text
+          value_type: string
+          variable: score_preview_text
+        - value_selector:
+          - '1787799955734'
+          - evidence_coverage_preview_text
+          value_type: string
+          variable: evidence_coverage_preview_text
+        selected: false
+        title: 最终正常输出
+        type: end
+      height: 217
+      id: '1787822187854'
+      position:
+        x: 3675
+        y: 255.16666666666669
+      positionAbsolute:
+        x: 3675
+        y: 255.16666666666669
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    viewport:
+      x: -3521.5591401282286
+      y: -21.316626872164193
+      zoom: 1.022410523021533
+  rag_pipeline_variables: []
