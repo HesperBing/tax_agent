@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "risk_nature_schema_v0_1.json",
+  "title": "Risk Nature Schema v0.1",
+  "description": "Schema for determining the nature of tax risks after evidence sufficiency and conclusion verification.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "risk_nature_results"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "risk_nature_results": {
+      "type": "array",
+      "description": "Risk nature judgement results for the current Tax Case.",
+      "items": {
+        "type": "object",
+        "required": [
+          "risk_nature_id",
+          "target_type",
+          "target_id",
+          "risk_nature",
+          "risk_nature_status",
+          "risk_level",
+          "evidence_sufficiency_id",
+          "conclusion_verification_id",
+          "source_transaction_fact_ids",
+          "source_regulation_result_ids"
+        ],
+        "properties": {
+          "risk_nature_id": {
+            "type": "string",
+            "description": "Unique ID of this risk nature result, such as RiskNature.001."
+          },
+          "target_type": {
+            "type": "string",
+            "enum": [
+              "tax_case",
+              "contract_chain",
+              "risk_event",
+              "avoidance_risk_signal",
+              "tax_judgement",
+              "other",
+              "unknown"
+            ],
+            "description": "Type of target being judged."
+          },
+          "target_id": {
+            "type": "string",
+            "description": "ID of the target being judged."
+          },
+          "risk_nature": {
+            "type": "string",
+            "enum": [
+              "compliant_or_low_risk",
+              "tax_avoidance_risk",
+              "tax_adjustment_risk",
+              "suspected_tax_violation",
+              "insufficient_evidence",
+              "pending",
+              "unknown",
+              "requires_manual_review"
+            ],
+            "description": "Nature of the risk under current facts, applicable regulations, evidence state and verification result."
+          },
+          "risk_nature_status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "candidate",
+              "insufficient_evidence",
+              "pending",
+              "unknown",
+              "requires_manual_review"
+            ],
+            "description": "Current status of this risk nature judgement."
+          },
+          "risk_level": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical",
+              "unknown"
+            ],
+            "description": "Overall risk level for this risk nature judgement."
+          },
+          "risk_nature_summary": {
+            "type": "string",
+            "description": "Short human-readable summary of the risk nature."
+          },
+          "reasoning_basis": {
+            "type": "array",
+            "description": "Main reasons supporting the risk nature judgement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_sufficiency_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Reference to Evidence Sufficiency result."
+          },
+          "conclusion_verification_id": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Reference to Conclusion Verification result."
+          },
+          "source_transaction_fact_ids": {
+            "type": "array",
+            "description": "Transaction Facts used in this judgement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_contract_chain_ids": {
+            "type": "array",
+            "description": "Contract chains used in this judgement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_chain_metric_ids": {
+            "type": "array",
+            "description": "Chain metrics used in this judgement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_regulation_result_ids": {
+            "type": "array",
+            "description": "Applicable regulation results used in this judgement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_avoidance_risk_signal_ids": {
+            "type": "array",
+            "description": "Avoidance risk signals used in this judgement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_case_match_result_ids": {
+            "type": "array",
+            "description": "Case RAG match results used as auxiliary references.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_anchor_ids": {
+            "type": "array",
+            "description": "Evidence anchors supporting this judgement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "description": "Limitations or unresolved issues of this judgement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "next_actions": {
+            "type": "array",
+            "description": "Suggested next actions for the user.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "judged_from": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

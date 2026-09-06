@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "case_match_result_schema_v0_1.json",
+  "title": "Case Match Result Schema v0.1",
+  "description": "Schema for Case RAG match results. Case matches provide reference patterns only and must not be used as standalone legal conclusions.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "case_match_results"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "case_match_results": {
+      "type": "array",
+      "description": "Historical case pattern matches related to the current Tax Case.",
+      "items": {
+        "type": "object",
+        "required": [
+          "case_match_result_id",
+          "matched_case_id",
+          "match_status",
+          "match_score",
+          "matched_pattern_type",
+          "source_contract_chain_ids",
+          "source_transaction_fact_ids"
+        ],
+        "properties": {
+          "case_match_result_id": {
+            "type": "string",
+            "description": "Unique ID of this case match result, such as CaseMatch.001."
+          },
+          "matched_case_id": {
+            "type": "string",
+            "description": "Reference ID of the matched historical case."
+          },
+          "matched_case_title": {
+            "type": "string",
+            "description": "Title or short name of the matched case."
+          },
+          "matched_case_source": {
+            "type": "string",
+            "description": "Source of the matched case, such as tax authority, court, inspection case, or public typical case."
+          },
+          "matched_case_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Original source URL if available."
+          },
+          "match_status": {
+            "type": "string",
+            "enum": [
+              "matched",
+              "not_matched",
+              "candidate",
+              "unknown",
+              "requires_manual_review"
+            ],
+            "description": "Current status of this case match."
+          },
+          "match_score": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Similarity score between the current Tax Case and the historical case pattern."
+          },
+          "matched_pattern_type": {
+            "type": "string",
+            "enum": [
+              "abnormal_cost_increase",
+              "revenue_split_or_deferral",
+              "related_party_pricing_abnormality",
+              "form_substance_mismatch",
+              "multi_contract_tax_effect",
+              "lack_of_business_purpose",
+              "invoice_risk",
+              "withholding_risk",
+              "other",
+              "unknown"
+            ],
+            "description": "Main pattern type represented by the matched case."
+          },
+          "similar_facts": {
+            "type": "array",
+            "description": "Facts in the current Tax Case that are similar to the historical case.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "different_facts": {
+            "type": "array",
+            "description": "Important differences between the current Tax Case and the historical case.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_facts_for_stronger_match": {
+            "type": "array",
+            "description": "Facts or evidence needed before the match can be treated as stronger.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_contract_chain_ids": {
+            "type": "array",
+            "description": "Contract chains related to this case match.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_transaction_fact_ids": {
+            "type": "array",
+            "description": "Transaction Facts related to this case match.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_evidence_state_ids": {
+            "type": "array",
+            "description": "Evidence State records used to evaluate the case match.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "reference_value": {
+            "type": "string",
+            "description": "How this historical case helps the current analysis."
+          },
+          "limitations": {
+            "type": "array",
+            "description": "Limitations of using this case as a reference.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "retrieval_query": {
+                "type": "string"
+              },
+              "retrieved_case_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

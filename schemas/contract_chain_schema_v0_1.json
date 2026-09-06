@@ -1,0 +1,246 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "contract_chain_schema_v0_1.json",
+  "title": "Contract Chain Schema v0.1",
+  "description": "Schema for representing contract chains within one Tax Case. A contract chain is built only from contracts and materials uploaded in the current Tax Case.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "contract_chains"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "contract_chains": {
+      "type": "array",
+      "description": "Candidate contract chains identified from the contracts uploaded in the same Tax Case.",
+      "items": {
+        "type": "object",
+        "required": [
+          "contract_chain_id",
+          "chain_sequence_no",
+          "chain_type",
+          "chain_status",
+          "contract_nodes",
+          "contract_edges",
+          "source_document_ids",
+          "transaction_fact_ids"
+        ],
+        "properties": {
+          "contract_chain_id": {
+            "type": "string",
+            "description": "Unique ID of this contract chain, such as Chain.001."
+          },
+          "chain_sequence_no": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Sequence number of the chain in the current Tax Case."
+          },
+          "chain_type": {
+            "type": "string",
+            "enum": [
+              "single_contract",
+              "main_contract_with_supplement",
+              "purchase_processing_sales",
+              "multi_contract_service_chain",
+              "related_contract_group",
+              "unknown"
+            ],
+            "description": "Type of the candidate contract chain."
+          },
+          "chain_status": {
+            "type": "string",
+            "enum": [
+              "confirmed",
+              "candidate",
+              "unknown",
+              "requires_manual_review"
+            ],
+            "description": "Confidence status of the contract chain."
+          },
+          "contract_nodes": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Contracts included in this chain.",
+            "items": {
+              "type": "object",
+              "required": [
+                "contract_node_id",
+                "source_document_id",
+                "document_role",
+                "contract_name",
+                "counterparty_name",
+                "subject_summary"
+              ],
+              "properties": {
+                "contract_node_id": {
+                  "type": "string",
+                  "description": "Node ID inside the chain, such as Chain.001.Node.001."
+                },
+                "source_document_id": {
+                  "type": "string",
+                  "description": "Original document ID or source document reference."
+                },
+                "contract_fact_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "Reference to the extracted Contract Fact."
+                },
+                "document_role": {
+                  "type": "string",
+                  "enum": [
+                    "main_contract",
+                    "supplementary_agreement",
+                    "change_agreement",
+                    "purchase_contract",
+                    "processing_contract",
+                    "sales_contract",
+                    "service_contract",
+                    "other",
+                    "unknown"
+                  ]
+                },
+                "contract_name": {
+                  "type": "string"
+                },
+                "counterparty_name": {
+                  "type": "string"
+                },
+                "subject_summary": {
+                  "type": "string",
+                  "description": "Brief summary of goods, services, rights or other transaction subject."
+                },
+                "amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "default": "CNY"
+                },
+                "signing_date": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date"
+                },
+                "economic_substance": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "contract_edges": {
+            "type": "array",
+            "description": "Relationships between contracts in this chain.",
+            "items": {
+              "type": "object",
+              "required": [
+                "from_contract_node_id",
+                "to_contract_node_id",
+                "relation_type",
+                "relation_status"
+              ],
+              "properties": {
+                "from_contract_node_id": {
+                  "type": "string"
+                },
+                "to_contract_node_id": {
+                  "type": "string"
+                },
+                "relation_type": {
+                  "type": "string",
+                  "enum": [
+                    "supplements",
+                    "changes",
+                    "precedes",
+                    "supports",
+                    "same_transaction",
+                    "cost_to_revenue",
+                    "purchase_to_processing",
+                    "processing_to_sales",
+                    "unknown"
+                  ]
+                },
+                "relation_status": {
+                  "type": "string",
+                  "enum": [
+                    "confirmed",
+                    "candidate",
+                    "unknown",
+                    "requires_manual_review"
+                  ]
+                },
+                "relation_reason": {
+                  "type": "string",
+                  "description": "Reason why the relationship is identified."
+                },
+                "source_fact_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "source_document_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Original uploaded documents used to build this chain."
+          },
+          "transaction_fact_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Transaction Facts related to this chain."
+          },
+          "chain_summary": {
+            "type": "string",
+            "description": "Short natural-language summary of this chain."
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "built_from": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

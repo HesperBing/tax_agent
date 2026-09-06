@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evidence_requirement_schema_v0_1.json",
+  "title": "Evidence Requirement Schema v0.1",
+  "description": "Schema for evidence requirements needed to confirm, reject, or further review tax risks, tax judgements, and avoidance risk signals.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "evidence_requirements"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "evidence_requirements": {
+      "type": "array",
+      "description": "Evidence requirements for the current Tax Case.",
+      "items": {
+        "type": "object",
+        "required": [
+          "evidence_requirement_id",
+          "requirement_type",
+          "requirement_status",
+          "required_material_type",
+          "requirement_reason",
+          "source_risk_signal_ids",
+          "source_transaction_fact_ids"
+        ],
+        "properties": {
+          "evidence_requirement_id": {
+            "type": "string",
+            "description": "Unique ID of this evidence requirement, such as EvidenceReq.001."
+          },
+          "requirement_type": {
+            "type": "string",
+            "enum": [
+              "tax_obligation_evidence",
+              "actual_performance_evidence",
+              "payment_evidence",
+              "invoice_evidence",
+              "withholding_evidence",
+              "tax_payment_evidence",
+              "delivery_acceptance_evidence",
+              "contract_supplement_evidence",
+              "business_purpose_evidence",
+              "pricing_basis_evidence",
+              "counterparty_relation_evidence",
+              "case_review_evidence",
+              "other",
+              "unknown"
+            ],
+            "description": "Type of evidence needed."
+          },
+          "requirement_status": {
+            "type": "string",
+            "enum": [
+              "needed",
+              "provided",
+              "not_applicable",
+              "pending",
+              "unknown"
+            ],
+            "description": "Current status of this evidence requirement."
+          },
+          "required_material_type": {
+            "type": "string",
+            "enum": [
+              "contract",
+              "supplementary_agreement",
+              "change_agreement",
+              "invoice",
+              "payment_or_receipt_voucher",
+              "withholding_voucher",
+              "tax_payment_certificate",
+              "delivery_or_acceptance_material",
+              "business_approval_material",
+              "pricing_document",
+              "counterparty_relation_material",
+              "case_reference_material",
+              "other"
+            ],
+            "description": "Material type expected from the user."
+          },
+          "required_material_name": {
+            "type": "string",
+            "description": "Human-readable name of the required material."
+          },
+          "requirement_reason": {
+            "type": "string",
+            "description": "Why this evidence is required."
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ],
+            "description": "Priority of collecting this evidence."
+          },
+          "source_risk_signal_ids": {
+            "type": "array",
+            "description": "Avoidance risk signals that require this evidence.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_tax_judgement_ids": {
+            "type": "array",
+            "description": "Tax judgement results related to this evidence requirement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_contract_chain_ids": {
+            "type": "array",
+            "description": "Contract chains related to this evidence requirement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_transaction_fact_ids": {
+            "type": "array",
+            "description": "Transaction Facts related to this evidence requirement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_evidence_state_ids": {
+            "type": "array",
+            "description": "Evidence State records related to this requirement.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "expected_evidence_effect": {
+            "type": "string",
+            "enum": [
+              "confirm_done",
+              "confirm_not_done",
+              "resolve_unknown",
+              "resolve_pending",
+              "support_risk_conclusion",
+              "weaken_risk_conclusion",
+              "support_manual_review",
+              "unknown"
+            ],
+            "description": "Expected analytical effect after the evidence is provided."
+          },
+          "next_action": {
+            "type": "string",
+            "description": "Suggested action for the user."
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "triggered_by": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

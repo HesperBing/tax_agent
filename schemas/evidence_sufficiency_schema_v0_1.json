@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evidence_sufficiency_schema_v0_1.json",
+  "title": "Evidence Sufficiency Schema v0.1",
+  "description": "Schema for determining whether current evidence is sufficient to support tax risk conclusions or avoidance risk signals.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "evidence_sufficiency_results"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "evidence_sufficiency_results": {
+      "type": "array",
+      "description": "Evidence sufficiency results for tax risks, tax judgements, or avoidance risk signals.",
+      "items": {
+        "type": "object",
+        "required": [
+          "evidence_sufficiency_id",
+          "target_type",
+          "target_id",
+          "sufficiency_status",
+          "conclusion_strength",
+          "evidence_requirement_ids",
+          "missing_evidence_requirement_ids",
+          "next_actions"
+        ],
+        "properties": {
+          "evidence_sufficiency_id": {
+            "type": "string",
+            "description": "Unique ID of this sufficiency result, such as EvidenceSufficiency.001."
+          },
+          "target_type": {
+            "type": "string",
+            "enum": [
+              "tax_judgement",
+              "risk_event",
+              "avoidance_risk_signal",
+              "case_match_result",
+              "contract_chain",
+              "chain_metric",
+              "other",
+              "unknown"
+            ],
+            "description": "Type of the conclusion or signal being checked."
+          },
+          "target_id": {
+            "type": "string",
+            "description": "ID of the target conclusion or signal being checked."
+          },
+          "sufficiency_status": {
+            "type": "string",
+            "enum": [
+              "sufficient",
+              "insufficient",
+              "partially_sufficient",
+              "pending",
+              "unknown",
+              "requires_manual_review"
+            ],
+            "description": "Whether current evidence is sufficient."
+          },
+          "conclusion_strength": {
+            "type": "string",
+            "enum": [
+              "none",
+              "weak",
+              "moderate",
+              "strong",
+              "unknown"
+            ],
+            "description": "How strongly current evidence supports the target conclusion."
+          },
+          "evidence_requirement_ids": {
+            "type": "array",
+            "description": "All evidence requirements considered in this sufficiency check.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "satisfied_evidence_requirement_ids": {
+            "type": "array",
+            "description": "Evidence requirements already satisfied by uploaded materials.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_evidence_requirement_ids": {
+            "type": "array",
+            "description": "Evidence requirements still missing.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "pending_evidence_requirement_ids": {
+            "type": "array",
+            "description": "Evidence requirements that are pending because the transaction stage has not arrived.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "not_applicable_evidence_requirement_ids": {
+            "type": "array",
+            "description": "Evidence requirements that are not applicable.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supporting_document_ids": {
+            "type": "array",
+            "description": "Uploaded documents that support the sufficiency result.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supporting_fact_ids": {
+            "type": "array",
+            "description": "Facts that support the sufficiency result.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "insufficiency_reason": {
+            "type": "string",
+            "description": "Reason why current evidence is insufficient or only partially sufficient."
+          },
+          "next_actions": {
+            "type": "array",
+            "description": "Suggested next actions for the user, such as uploading evidence or manual review.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "can_enter_risk_nature_judgement": {
+            "type": "boolean",
+            "description": "Whether the workflow can proceed to Risk Nature Judgement."
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "checked_requirements": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

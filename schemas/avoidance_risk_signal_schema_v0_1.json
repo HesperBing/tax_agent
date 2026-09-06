@@ -1,0 +1,185 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "avoidance_risk_signal_schema_v0_1.json",
+  "title": "Avoidance Risk Signal Schema v0.1",
+  "description": "Schema for lightweight tax avoidance risk signals. A signal is not a final violation conclusion; it only indicates that further evidence review may be needed.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "avoidance_risk_signals"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "avoidance_risk_signals": {
+      "type": "array",
+      "description": "Lightweight avoidance risk signals detected in the current Tax Case.",
+      "items": {
+        "type": "object",
+        "required": [
+          "avoidance_risk_signal_id",
+          "signal_type",
+          "signal_status",
+          "signal_level",
+          "source_contract_chain_ids",
+          "source_transaction_fact_ids",
+          "evidence_requirement_ids"
+        ],
+        "properties": {
+          "avoidance_risk_signal_id": {
+            "type": "string",
+            "description": "Unique ID of this risk signal, such as AvoidanceSignal.001."
+          },
+          "signal_type": {
+            "type": "string",
+            "enum": [
+              "abnormal_cost_increase",
+              "revenue_split_or_deferral",
+              "related_party_pricing_abnormality",
+              "form_substance_mismatch",
+              "multi_contract_tax_effect",
+              "lack_of_business_purpose",
+              "case_pattern_similarity",
+              "other",
+              "unknown"
+            ],
+            "description": "Type of tax avoidance risk signal."
+          },
+          "signal_status": {
+            "type": "string",
+            "enum": [
+              "triggered",
+              "not_triggered",
+              "unknown",
+              "pending",
+              "requires_manual_review"
+            ],
+            "description": "Current status of the signal under available evidence."
+          },
+          "signal_level": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical",
+              "unknown"
+            ],
+            "description": "Preliminary level of this risk signal. This is not a final legal conclusion."
+          },
+          "signal_name": {
+            "type": "string",
+            "description": "Human-readable name of the signal."
+          },
+          "signal_description": {
+            "type": "string",
+            "description": "Short explanation of why the signal is or is not triggered."
+          },
+          "source_contract_chain_ids": {
+            "type": "array",
+            "description": "Contract chains that support this signal.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_chain_metric_ids": {
+            "type": "array",
+            "description": "Chain metric results used by this signal.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_transaction_fact_ids": {
+            "type": "array",
+            "description": "Transaction Facts that support this signal.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_judgement_resolution_ids": {
+            "type": "array",
+            "description": "Tax judgement or consistency results that support this signal.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "case_match_result_ids": {
+            "type": "array",
+            "description": "Case RAG match results related to this signal.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "evidence_requirement_ids": {
+            "type": "array",
+            "description": "Evidence requirements needed to confirm or reject this signal.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "known_facts": {
+            "type": "array",
+            "description": "Facts currently supporting the signal.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "missing_evidence_summary": {
+            "type": "array",
+            "description": "Evidence still needed before drawing a stronger conclusion.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "next_actions": {
+            "type": "array",
+            "description": "Suggested next actions such as uploading additional evidence or manual review.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "conclusion_strength": {
+            "type": "string",
+            "enum": [
+              "none",
+              "weak",
+              "moderate",
+              "strong",
+              "unknown"
+            ],
+            "description": "How strongly current evidence supports this signal."
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "triggered_by_rules": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
