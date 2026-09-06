@@ -1,0 +1,205 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "conclusion_verification_schema_v0_1.json",
+  "title": "Conclusion Verification Schema v0.1",
+  "description": "Schema for evidence-based verification before outputting important tax risk conclusions.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "conclusion_verification_results"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "conclusion_verification_results": {
+      "type": "array",
+      "description": "Verification results for important tax risk conclusions.",
+      "items": {
+        "type": "object",
+        "required": [
+          "conclusion_verification_id",
+          "target_conclusion_type",
+          "target_conclusion_id",
+          "verification_status",
+          "evidence_anchor_ids",
+          "regulation_result_ids",
+          "verification_findings"
+        ],
+        "properties": {
+          "conclusion_verification_id": {
+            "type": "string",
+            "description": "Unique ID of this verification result, such as ConclusionVerification.001."
+          },
+          "target_conclusion_type": {
+            "type": "string",
+            "enum": [
+              "tax_judgement",
+              "risk_event",
+              "avoidance_risk_signal",
+              "risk_nature",
+              "case_match_result",
+              "other",
+              "unknown"
+            ],
+            "description": "Type of conclusion being verified."
+          },
+          "target_conclusion_id": {
+            "type": "string",
+            "description": "ID of the conclusion being verified."
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "partially_verified",
+              "not_verified",
+              "pending",
+              "unknown",
+              "requires_manual_review"
+            ],
+            "description": "Whether the conclusion is supported by current evidence."
+          },
+          "evidence_anchor_ids": {
+            "type": "array",
+            "description": "Evidence anchors supporting the conclusion, such as document IDs, fact IDs, or voucher IDs.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_document_ids": {
+            "type": "array",
+            "description": "Source documents used in the verification.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_fact_ids": {
+            "type": "array",
+            "description": "Facts used in the verification.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "regulation_result_ids": {
+            "type": "array",
+            "description": "Regulation retrieval or Tax Judgement references used in the verification.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "case_match_result_ids": {
+            "type": "array",
+            "description": "Case RAG match results used as auxiliary references.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "verification_findings": {
+            "type": "array",
+            "description": "Findings from the verification process.",
+            "items": {
+              "type": "object",
+              "required": [
+                "finding_id",
+                "finding_type",
+                "finding_status",
+                "finding_text"
+              ],
+              "properties": {
+                "finding_id": {
+                  "type": "string"
+                },
+                "finding_type": {
+                  "type": "string",
+                  "enum": [
+                    "fact_supported",
+                    "fact_conflict",
+                    "regulation_supported",
+                    "regulation_mismatch",
+                    "evidence_missing",
+                    "case_similarity_limited",
+                    "manual_review_needed",
+                    "other"
+                  ]
+                },
+                "finding_status": {
+                  "type": "string",
+                  "enum": [
+                    "pass",
+                    "warning",
+                    "fail",
+                    "unknown"
+                  ]
+                },
+                "finding_text": {
+                  "type": "string"
+                },
+                "source_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "conclusion_strength_after_verification": {
+            "type": "string",
+            "enum": [
+              "none",
+              "weak",
+              "moderate",
+              "strong",
+              "unknown"
+            ],
+            "description": "Conclusion strength after evidence verification."
+          },
+          "blocking_issues": {
+            "type": "array",
+            "description": "Issues that block final conclusion output.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "next_actions": {
+            "type": "array",
+            "description": "Suggested next actions when verification is incomplete.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "verified_against": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

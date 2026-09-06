@@ -1,0 +1,220 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chain_metrics_schema_v0_1.json",
+  "title": "Chain Metrics Schema v0.1",
+  "description": "Schema for calculating revenue, cost, hidden profit and hidden profit rate for contract chains within one Tax Case.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "chain_metrics"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "chain_metrics": {
+      "type": "array",
+      "description": "Metrics calculated for each contract chain.",
+      "items": {
+        "type": "object",
+        "required": [
+          "chain_metric_id",
+          "contract_chain_id",
+          "calculation_status",
+          "total_revenue_amount",
+          "total_cost_amount",
+          "hidden_profit_amount",
+          "hidden_profit_rate",
+          "source_contract_node_ids",
+          "source_transaction_fact_ids"
+        ],
+        "properties": {
+          "chain_metric_id": {
+            "type": "string",
+            "description": "Unique ID of this chain metric result, such as ChainMetric.001."
+          },
+          "contract_chain_id": {
+            "type": "string",
+            "description": "Reference to the contract chain being measured."
+          },
+          "calculation_status": {
+            "type": "string",
+            "enum": [
+              "calculated",
+              "insufficient_data",
+              "not_applicable",
+              "unknown",
+              "requires_manual_review"
+            ],
+            "description": "Whether the chain metrics can be calculated from current evidence."
+          },
+          "total_revenue_amount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Total revenue amount identified in this chain."
+          },
+          "total_cost_amount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Total cost amount identified in this chain."
+          },
+          "hidden_profit_amount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Potential hidden profit amount. Usually revenue minus cost when both are available."
+          },
+          "hidden_profit_rate": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Potential hidden profit rate. Usually hidden_profit_amount divided by total_revenue_amount."
+          },
+          "currency": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": "CNY"
+          },
+          "revenue_contract_node_ids": {
+            "type": "array",
+            "description": "Contract nodes treated as revenue side.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cost_contract_node_ids": {
+            "type": "array",
+            "description": "Contract nodes treated as cost side.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_contract_node_ids": {
+            "type": "array",
+            "description": "All contract nodes used for this calculation.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_transaction_fact_ids": {
+            "type": "array",
+            "description": "Transaction Facts used for this calculation.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "amount_breakdown": {
+            "type": "array",
+            "description": "Detailed amount sources used in revenue and cost calculation.",
+            "items": {
+              "type": "object",
+              "required": [
+                "amount_item_id",
+                "amount_role",
+                "amount",
+                "source_contract_node_id"
+              ],
+              "properties": {
+                "amount_item_id": {
+                  "type": "string"
+                },
+                "amount_role": {
+                  "type": "string",
+                  "enum": [
+                    "revenue",
+                    "cost",
+                    "neutral",
+                    "unknown"
+                  ]
+                },
+                "amount": {
+                  "type": [
+                    "number",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "currency": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "default": "CNY"
+                },
+                "source_contract_node_id": {
+                  "type": "string"
+                },
+                "source_document_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "source_fact_id": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "explanation": {
+                  "type": "string",
+                  "description": "Reason why this amount is treated as revenue, cost, neutral or unknown."
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "calculation_basis": {
+            "type": "string",
+            "description": "Short explanation of the calculation formula and assumptions."
+          },
+          "warnings": {
+            "type": "array",
+            "description": "Warnings such as missing cost evidence, missing revenue evidence, or uncertain amount direction.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "calculated_from": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "missing_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,282 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "transaction_facts_schema_v1_2.json",
+  "title": "Transaction Facts Schema v1.2",
+  "description": "Schema for normalized transaction facts within one Tax Case. Version 1.2 adds references to contract chains, contract nodes, evidence states, and economic substance for multi-contract analysis.",
+  "type": "object",
+  "required": [
+    "tax_case_id",
+    "transaction_facts"
+  ],
+  "properties": {
+    "tax_case_id": {
+      "type": "string",
+      "description": "Unique identifier of the current Tax Case."
+    },
+    "transaction_facts": {
+      "type": "array",
+      "description": "Normalized transaction facts generated from Contract Facts, Actual Facts, Evidence State, and Economic Substance.",
+      "items": {
+        "type": "object",
+        "required": [
+          "transaction_fact_id",
+          "transaction_fact_type",
+          "transaction_status",
+          "source_document_ids",
+          "source_contract_fact_ids",
+          "source_actual_fact_ids",
+          "source_evidence_state_ids",
+          "economic_substance_refs"
+        ],
+        "properties": {
+          "transaction_fact_id": {
+            "type": "string",
+            "description": "Unique ID of this transaction fact, such as TransactionFact.001."
+          },
+          "transaction_fact_type": {
+            "type": "string",
+            "enum": [
+              "contract_obligation",
+              "actual_performance",
+              "payment",
+              "invoice",
+              "withholding",
+              "tax_payment",
+              "delivery_acceptance",
+              "economic_substance",
+              "contract_chain_relation",
+              "other",
+              "unknown"
+            ],
+            "description": "Type of normalized transaction fact."
+          },
+          "transaction_status": {
+            "type": "string",
+            "enum": [
+              "confirmed_done",
+              "confirmed_not_done",
+              "pending",
+              "unknown",
+              "not_applicable",
+              "requires_manual_review"
+            ],
+            "description": "Current status of this transaction fact under available evidence."
+          },
+          "transaction_stage": {
+            "type": "string",
+            "enum": [
+              "pre_signing",
+              "signed_not_paid",
+              "paid_not_completed",
+              "completed",
+              "unknown",
+              "not_applicable"
+            ],
+            "description": "Current transaction stage if it can be inferred."
+          },
+          "contract_chain_ids": {
+            "type": "array",
+            "description": "Contract chain IDs related to this transaction fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "contract_node_ids": {
+            "type": "array",
+            "description": "Contract node IDs related to this transaction fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_document_ids": {
+            "type": "array",
+            "description": "Original uploaded documents used to generate this transaction fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_contract_fact_ids": {
+            "type": "array",
+            "description": "Contract Fact IDs used to generate this transaction fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_actual_fact_ids": {
+            "type": "array",
+            "description": "Actual Fact IDs used to generate this transaction fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_evidence_state_ids": {
+            "type": "array",
+            "description": "Evidence State IDs used to generate this transaction fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "economic_substance_refs": {
+            "type": "array",
+            "description": "Economic substance references related to this transaction fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "subject_name": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Goods, service, right, or other transaction subject."
+          },
+          "business_type": {
+            "type": "array",
+            "description": "Business type labels, such as technology service, sales, processing, licensing, or consulting.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tax_type_candidates": {
+            "type": "array",
+            "description": "Possible tax types related to this transaction fact.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "payer_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "payee_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "counterparty_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "amount": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "currency": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": "CNY"
+          },
+          "contract_signing_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "performance_start_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "performance_end_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "payment_due_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "actual_payment_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "invoice_issue_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "tax_obligation_date_candidates": {
+            "type": "object",
+            "description": "Candidate dates for tax obligation judgement.",
+            "additionalProperties": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date"
+            }
+          },
+          "fact_summary": {
+            "type": "string",
+            "description": "Short natural-language summary of this transaction fact."
+          },
+          "confidence": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 1
+          },
+          "warnings": {
+            "type": "array",
+            "description": "Warnings such as missing amount, uncertain counterparty, or unclear transaction stage.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "trace": {
+            "type": "object",
+            "description": "Trace information for auditability.",
+            "properties": {
+              "built_from": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "source_fields": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "notes": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
