@@ -1,0 +1,1623 @@
+app:
+  description: 合同税务健康评分与大模型税务助手主工作流
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: workflow
+  name: Tax Agent Main Workflow v0.6 - Mock Integration
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/deepseek:0.0.24@9e12eef09973667f0eaf4f082af883167e1de88740b22e71e71488d020c3778a
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        knowledge_file_size_limit: 50
+        single_chunk_attachment_limit: 10
+        skill_file_size_limit: 50
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1787738395307-source-1787739990409-target
+      selected: false
+      source: '1787738395307'
+      sourceHandle: source
+      target: '1787739990409'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: document-extractor
+        targetType: iteration
+      id: 1787739990409-source-1787740938854-target
+      selected: false
+      source: '1787739990409'
+      sourceHandle: source
+      target: '1787740938854'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1787740938854'
+        sourceType: iteration-start
+        targetType: llm
+      id: 1787740938854start-source-1787742486092-target
+      selected: false
+      source: 1787740938854start
+      sourceHandle: source
+      target: '1787742486092'
+      targetHandle: target
+      type: custom
+      zIndex: 1001
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: iteration
+        targetType: code
+      id: 1787740938854-source-1787745659893-target
+      selected: false
+      source: '1787740938854'
+      sourceHandle: source
+      target: '1787745659893'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1787745659893-source-1787747784468-target
+      selected: false
+      source: '1787745659893'
+      sourceHandle: source
+      target: '1787747784468'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: end
+      id: 1787747784468-true-1787748123732-target
+      selected: false
+      source: '1787747784468'
+      sourceHandle: 'true'
+      target: '1787748123732'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1787747784468-false-1787794997135-target
+      selected: false
+      source: '1787747784468'
+      sourceHandle: 'false'
+      target: '1787794997135'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1787794997135-source-1787796773852-target
+      selected: false
+      source: '1787794997135'
+      sourceHandle: source
+      target: '1787796773852'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1787797443833-source-1787798299682-target
+      selected: false
+      source: '1787797443833'
+      sourceHandle: source
+      target: '1787798299682'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1787798299682-source-1787799955734-target
+      selected: false
+      source: '1787798299682'
+      sourceHandle: source
+      target: '1787799955734'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: end
+      id: 1787799955734-source-1787822187854-target
+      selected: false
+      source: '1787799955734'
+      sourceHandle: source
+      target: '1787822187854'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1787796773852-source-1788673950422-target
+      selected: false
+      source: '1787796773852'
+      sourceHandle: source
+      target: '1788673950422'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: if-else
+      id: 1788673950422-source-1788675393645-target
+      source: '1788673950422'
+      sourceHandle: source
+      target: '1788675393645'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1788675393645-false-1787797443833-target
+      source: '1788675393645'
+      sourceHandle: 'false'
+      target: '1787797443833'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: if-else
+        targetType: code
+      id: 1788675393645-true-1788675871510-target
+      source: '1788675393645'
+      sourceHandle: 'true'
+      target: '1788675871510'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1788675871510-source-1788676244020-target
+      source: '1788675871510'
+      sourceHandle: source
+      target: '1788676244020'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: code
+        targetType: code
+      id: 1788676244020-source-1787797443833-target
+      source: '1788676244020'
+      sourceHandle: source
+      target: '1787797443833'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 用户输入
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          default: ''
+          hide: false
+          hint: ''
+          label: 上传税务文件
+          max_length: 5
+          options: []
+          placeholder: ''
+          required: true
+          type: file-list
+          variable: uploaded_files
+        - default: ''
+          hint: ''
+          label: 问题描述
+          options: []
+          placeholder: ''
+          required: true
+          type: text-input
+          variable: query
+      height: 134
+      id: '1787738395307'
+      position:
+        x: 0
+        y: 34.06666666666666
+      positionAbsolute:
+        x: 0
+        y: 34.06666666666666
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        is_array_file: true
+        selected: false
+        title: 文档提取器
+        type: document-extractor
+        variable_selector:
+        - '1787738395307'
+        - uploaded_files
+      height: 103
+      id: '1787739990409'
+      position:
+        x: 342
+        y: 54.73333333333332
+      positionAbsolute:
+        x: 342
+        y: 54.73333333333332
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        error_handle_mode: terminated
+        flatten_output: true
+        height: 208
+        is_parallel: false
+        iterator_input_type: array[string]
+        iterator_selector:
+        - '1787739990409'
+        - text
+        output_selector:
+        - '1787742486092'
+        - structured_output
+        output_type: array[object]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1787740938854start
+        title: 迭代
+        type: iteration
+        width: 486
+      height: 208
+      id: '1787740938854'
+      position:
+        x: 684
+        y: 20.066666666666663
+      positionAbsolute:
+        x: 684
+        y: 20.066666666666663
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 486
+      zIndex: 0
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1787740938854start
+      parentId: '1787740938854'
+      position:
+        x: 60
+        y: 72
+      positionAbsolute:
+        x: 744
+        y: 92.06666666666666
+      selectable: false
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1001
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        isInIteration: true
+        isInLoop: false
+        iteration_id: '1787740938854'
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: deepseek-v4-flash
+          provider: langgenius/deepseek/deepseek
+        prompt_template:
+        - id: b353f845-3a91-4bd9-909f-6e549fae26da
+          role: system
+          text: '你是 Tax Agent 的文件分类节点。
+
+
+            你的任务是根据当前文件正文判断文件类型。只能使用下列 source_file_type：
+
+
+            contract
+
+            invoice
+
+            payment_receipt
+
+            withholding_certificate
+
+            tax_filing_material
+
+            tax_payment_certificate
+
+            acceptance_material
+
+            delivery_material
+
+            other
+
+
+            如果 source_file_type 为 contract，还必须判断 contract_document_role，只能使用：
+
+
+            main_contract
+
+            supplementary_agreement
+
+            amendment_agreement
+
+
+            分类规则：
+
+
+            1. 只能根据文件正文分类，不得猜测正文中不存在的信息。
+
+            2. 非合同文件的 contract_document_role 必须为 null。
+
+            3. 如果能够可靠分类，classification_status 为 success。
+
+            4. 如果正文为空、内容不足或无法可靠分类，classification_status 为 failed，source_file_type
+            和 contract_document_role 均为 null。
+
+            5. “other”表示能够确定文件不属于前面八类，不代表分类失败。
+
+            6. 输出必须是合法 JSON，不要输出 Markdown、解释文字或代码块。'
+        - id: b4422351-35eb-4c8b-b5ad-e1b013f7a419
+          role: user
+          text: 请分类下面这份文件：{{#1787740938854.item#}}
+        selected: false
+        structured_output:
+          schema:
+            additionalProperties: false
+            properties:
+              classification_status:
+                description: 文件分类状态
+                enum:
+                - success
+                - failed
+                type: string
+              contract_document_role:
+                description: 合同文件角色，非合同文件或分类失败时为null
+                enum:
+                - main_contract
+                - supplementary_agreement
+                - amendment_agreement
+                - null
+                type:
+                - string
+                - 'null'
+              source_file_type:
+                description: 文件类型，分类失败时为null
+                enum:
+                - contract
+                - invoice
+                - payment_receipt
+                - withholding_certificate
+                - tax_filing_material
+                - tax_payment_certificate
+                - acceptance_material
+                - delivery_material
+                - other
+                - null
+                type:
+                - string
+                - 'null'
+            required:
+            - classification_status
+            - source_file_type
+            - contract_document_role
+            type: object
+        structured_output_enabled: true
+        title: 文件分类器
+        type: llm
+        vision:
+          enabled: false
+      height: 87
+      id: '1787742486092'
+      parentId: '1787740938854'
+      position:
+        x: 184
+        y: 60
+      positionAbsolute:
+        x: 868
+        y: 80.06666666666666
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 1001
+    - data:
+        code: "def main(texts: list, classifications: list) -> dict:\n    allowed_file_types\
+          \ = {\n        \"contract\",\n        \"invoice\",\n        \"payment_receipt\"\
+          ,\n        \"withholding_certificate\",\n        \"tax_filing_material\"\
+          ,\n        \"tax_payment_certificate\",\n        \"acceptance_material\"\
+          ,\n        \"delivery_material\",\n        \"other\",\n    }\n\n    allowed_contract_roles\
+          \ = {\n        \"main_contract\",\n        \"supplementary_agreement\",\n\
+          \        \"amendment_agreement\",\n    }\n\n    if not isinstance(texts,\
+          \ list):\n        texts = []\n\n    if not isinstance(classifications, list):\n\
+          \        classifications = []\n\n    valid_documents = []\n    validation_errors\
+          \ = []\n\n    total_count = max(len(texts), len(classifications))\n\n  \
+          \  for index in range(total_count):\n        text = texts[index] if index\
+          \ < len(texts) else \"\"\n        classification = (\n            classifications[index]\n\
+          \            if index < len(classifications)\n            and isinstance(classifications[index],\
+          \ dict)\n            else {}\n        )\n\n        status = classification.get(\"\
+          classification_status\")\n        source_file_type = classification.get(\"\
+          source_file_type\")\n        contract_document_role = classification.get(\"\
+          contract_document_role\")\n\n        error_codes = []\n\n        if not\
+          \ isinstance(text, str) or not text.strip():\n            error_codes.append(\"\
+          EMPTY_EXTRACTED_TEXT\")\n\n        if not classification:\n            error_codes.append(\"\
+          MISSING_CLASSIFICATION_RESULT\")\n        else:\n            if status not\
+          \ in {\"success\", \"failed\"}:\n                error_codes.append(\"INVALID_CLASSIFICATION_STATUS\"\
+          )\n\n            if status == \"success\":\n                if source_file_type\
+          \ not in allowed_file_types:\n                    error_codes.append(\"\
+          INVALID_SOURCE_FILE_TYPE\")\n\n                if source_file_type == \"\
+          contract\":\n                    if contract_document_role not in allowed_contract_roles:\n\
+          \                        error_codes.append(\"INVALID_CONTRACT_DOCUMENT_ROLE\"\
+          )\n                elif contract_document_role is not None:\n          \
+          \          error_codes.append(\"UNEXPECTED_CONTRACT_DOCUMENT_ROLE\")\n\n\
+          \            if status == \"failed\":\n                error_codes.append(\"\
+          CLASSIFICATION_FAILED\")\n\n                if source_file_type is not None:\n\
+          \                    error_codes.append(\"FAILED_TYPE_MUST_BE_NULL\")\n\n\
+          \                if contract_document_role is not None:\n              \
+          \      error_codes.append(\"FAILED_ROLE_MUST_BE_NULL\")\n\n        if error_codes:\n\
+          \            validation_errors.append(\n                {\n            \
+          \        \"file_index\": index,\n                    \"error_codes\": error_codes,\n\
+          \                }\n            )\n        else:\n            valid_documents.append(\n\
+          \                {\n                    \"file_index\": index,\n       \
+          \             \"document_text\": text,\n                    \"classification_status\"\
+          : status,\n                    \"source_file_type\": source_file_type,\n\
+          \                    \"contract_document_role\": contract_document_role,\n\
+          \                }\n            )\n\n    return {\n        \"valid_documents\"\
+          : valid_documents,\n        \"validation_errors\": validation_errors,\n\
+          \        \"has_errors\": len(validation_errors) > 0,\n        \"total_count\"\
+          : total_count,\n        \"valid_count\": len(valid_documents),\n       \
+          \ \"error_count\": len(validation_errors),\n    }"
+        code_language: python3
+        outputs:
+          error_count:
+            children: null
+            type: number
+          has_errors:
+            children: null
+            type: boolean
+          total_count:
+            children: null
+            type: number
+          valid_count:
+            children: null
+            type: number
+          valid_documents:
+            children: null
+            type: array[object]
+          validation_errors:
+            children: null
+            type: array[object]
+        selected: false
+        title: 代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1787739990409'
+          - text
+          value_type: array[string]
+          variable: texts
+        - value_selector:
+          - '1787740938854'
+          - output
+          value_type: array[object]
+          variable: classifications
+      height: 51
+      id: '1787745659893'
+      position:
+        x: 1270
+        y: 132.73333333333335
+      positionAbsolute:
+        x: 1270
+        y: 132.73333333333335
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 3505f5c7-e410-47a6-ab0f-05076ea0ca8c
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1787745659893'
+            - has_errors
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 123
+      id: '1787747784468'
+      position:
+        x: 1612
+        y: 93.39999999999998
+      positionAbsolute:
+        x: 1612
+        y: 93.39999999999998
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1787745659893'
+          - validation_errors
+          value_type: array[object]
+          variable: validation_errors
+        - value_selector:
+          - '1787745659893'
+          - has_errors
+          value_type: boolean
+          variable: has_errors
+        - value_selector:
+          - '1787745659893'
+          - total_count
+          value_type: number
+          variable: total_count
+        - value_selector:
+          - '1787745659893'
+          - valid_count
+          value_type: number
+          variable: valid_count
+        - value_selector:
+          - '1787745659893'
+          - error_count
+          value_type: number
+          variable: error_count
+        selected: false
+        title: 最终异常输出
+        type: end
+      height: 194
+      id: '1787748123732'
+      position:
+        x: 1974
+        y: 0
+      positionAbsolute:
+        x: 1974
+        y: 0
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(valid_documents: list) -> dict:\n    # 集成测试 Mock：不调用 LLM，不产生模型\
+          \ Token\n    if not isinstance(valid_documents, list):\n        valid_documents\
+          \ = []\n\n    tax_case_id = \"TC-TAX-CROSS-001\"\n\n    contract_facts =\
+          \ {\n        \"tax_case_id\": tax_case_id,\n        \"contract_name\": \"\
+          多主体数字化服务交易\",\n        \"contract_number\": \"CT01/CT02/CT03\",\n      \
+          \  \"contract_content\": \"数字化战略咨询、数据治理实施及独立质量复核\",\n        \"contract_amount\"\
+          : 1140000,\n        \"currency\": \"CNY\",\n        \"contract_content_details\"\
+          : [\n            {\n                \"contract_content_detail_id\": \"CONTRACT-FACT-CT01\"\
+          ,\n                \"content\": \"CT01 数字化战略咨询\",\n                \"sources\"\
+          : [{\"source_file_id\": \"CT01\"}]\n            },\n            {\n    \
+          \            \"contract_content_detail_id\": \"CONTRACT-FACT-CT02\",\n \
+          \               \"content\": \"CT02 数据治理实施\",\n                \"sources\"\
+          : [{\"source_file_id\": \"CT02\"}]\n            },\n            {\n    \
+          \            \"contract_content_detail_id\": \"CONTRACT-FACT-CT03\",\n \
+          \               \"content\": \"CT03 独立质量复核\",\n                \"sources\"\
+          : [{\"source_file_id\": \"CT03\"}]\n            }\n        ],\n        \"\
+          contract_fact_issues\": [],\n        \"contract_fact_relations\": []\n \
+          \   }\n\n    actual_facts = {\n        \"tax_case_id\": tax_case_id,\n \
+          \       \"actual_payments\": [],\n        \"actual_invoices\": [],\n   \
+          \     \"actual_performances\": [],\n        \"actual_acceptances\": [\n\
+          \            {\n                \"actual_acceptance_id\": \"ACTUAL-ACCEPTANCE-CT01\"\
+          ,\n                \"acceptance_date\": \"2024-06-28\",\n              \
+          \  \"result\": \"accepted\",\n                \"sources\": [{\"source_file_id\"\
+          : \"PF01\"}]\n            },\n            {\n                \"actual_acceptance_id\"\
+          : \"ACTUAL-ACCEPTANCE-CT02\",\n                \"acceptance_date\": \"2024-07-12\"\
+          ,\n                \"result\": \"accepted\",\n                \"sources\"\
+          : [{\"source_file_id\": \"PF01\"}]\n            },\n            {\n    \
+          \            \"actual_acceptance_id\": \"ACTUAL-ACCEPTANCE-CT03\",\n   \
+          \             \"acceptance_date\": \"2024-07-22\",\n                \"result\"\
+          : \"accepted\",\n                \"sources\": [{\"source_file_id\": \"PF01\"\
+          }]\n            }\n        ],\n        \"actual_settlements\": [],\n   \
+          \     \"actual_pricing_bases\": [],\n        \"actual_expenses\": [],\n\
+          \        \"actual_adjustments\": [],\n        \"actual_agency_transactions\"\
+          : [],\n        \"actual_withholdings\": [],\n        \"actual_tax_filings\"\
+          : [],\n        \"actual_tax_payments\": [],\n        \"actual_tax_treatments\"\
+          : [],\n        \"actual_obligation_states\": [],\n        \"actual_fact_relations\"\
+          : [],\n        \"actual_fact_issues\": [],\n        \"duplicate_groups\"\
+          : []\n    }\n\n    evidence_state = {\n        \"tax_case_id\": tax_case_id,\n\
+          \        \"evidence_requirement_instances\": [\n            {\n        \
+          \        \"evidence_requirement_instance_id\": \"ERI-TC-TAX-CROSS-001\"\
+          ,\n                \"evidence_requirement_id\": \"contract_performance_evidence\"\
+          ,\n                \"target_object_id\": \"TRANSACTION-TC-TAX-CROSS-001\"\
+          ,\n                \"trigger_source_ids\": [\"PF01\", \"PF02\"],\n     \
+          \           \"period_start\": None,\n                \"period_end\": None,\n\
+          \                \"check_due_date\": None\n            }\n        ],\n \
+          \       \"evidence_states\": [\n            {\n                \"evidence_state_id\"\
+          : \"EVIDENCE-STATE-TC-TAX-CROSS-001\",\n                \"evidence_requirement_instance_id\"\
+          : \"ERI-TC-TAX-CROSS-001\",\n                \"state\": \"provided\",\n\
+          \                \"related_actual_fact_ids\": [\n                    \"\
+          ACTUAL-ACCEPTANCE-CT01\",\n                    \"ACTUAL-ACCEPTANCE-CT02\"\
+          ,\n                    \"ACTUAL-ACCEPTANCE-CT03\"\n                ],\n\
+          \                \"supporting_source_file_ids\": [\"PF01\", \"PF02\"]\n\
+          \            }\n        ]\n    }\n\n    economic_substance = {\n       \
+          \ \"tax_case_id\": tax_case_id,\n        \"economic_substance_components\"\
+          : [\n            {\n                \"substance_component_id\": \"SUBSTANCE-TC-TAX-CROSS-001\"\
+          ,\n                \"substance_code\": \"technical_consulting\",\n     \
+          \           \"classification_status\": \"classified\",\n               \
+          \ \"role\": \"primary\",\n                \"amount\": 1140000,\n       \
+          \         \"currency\": \"CNY\",\n                \"contract_fact_refs\"\
+          : [\n                    \"CONTRACT-FACT-CT01\",\n                    \"\
+          CONTRACT-FACT-CT02\",\n                    \"CONTRACT-FACT-CT03\"\n    \
+          \            ]\n            }\n        ],\n        \"is_mixed\": False\n\
+          \    }\n\n    return {\n        \"source_documents\": valid_documents,\n\
+          \        \"contract_facts\": contract_facts,\n        \"actual_facts\":\
+          \ actual_facts,\n        \"evidence_state\": evidence_state,\n        \"\
+          economic_substance\": economic_substance,\n        \"facts_status\": \"\
+          complete_success\"\n    }"
+        code_language: python3
+        outputs:
+          actual_facts:
+            children: null
+            type: object
+          contract_facts:
+            children: null
+            type: object
+          economic_substance:
+            children: null
+            type: object
+          evidence_state:
+            children: null
+            type: object
+          facts_status:
+            children: null
+            type: string
+          source_documents:
+            children: null
+            type: array[object]
+        selected: false
+        title: Facts Mock 接入
+        type: code
+        variables:
+        - value_selector:
+          - '1787745659893'
+          - valid_documents
+          value_type: array[object]
+          variable: valid_documents
+      height: 51
+      id: '1787794997135'
+      position:
+        x: 1974
+        y: 272
+      positionAbsolute:
+        x: 1974
+        y: 272
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(\n    contract_facts: dict,\n    actual_facts: dict,\n   \
+          \ evidence_state: dict,\n    economic_substance: dict\n) -> dict:\n    #\
+          \ 集成测试 Mock：不调用 LLM，不产生模型 Token\n    tax_case_id = \"TC-TAX-CROSS-001\"\n\
+          \n    transaction_facts = [\n        {\n            \"transaction_fact_id\"\
+          : \"TRANSACTION-TC-TAX-CROSS-001\",\n            \"economic_substance_ref\"\
+          : \"SUBSTANCE-TC-TAX-CROSS-001\",\n            \"substance_code\": \"technical_consulting\"\
+          ,\n            \"contract_fact_refs\": [\n                \"CONTRACT-FACT-CT01\"\
+          ,\n                \"CONTRACT-FACT-CT02\",\n                \"CONTRACT-FACT-CT03\"\
+          \n            ],\n            \"actual_fact_refs\": [\n                \"\
+          ACTUAL-ACCEPTANCE-CT01\",\n                \"ACTUAL-ACCEPTANCE-CT02\",\n\
+          \                \"ACTUAL-ACCEPTANCE-CT03\"\n            ],\n          \
+          \  \"evidence_state_refs\": [\n                \"EVIDENCE-STATE-TC-TAX-CROSS-001\"\
+          \n            ]\n        }\n    ]\n\n    payload = {\n        \"tax_case_id\"\
+          : tax_case_id,\n        \"transaction_facts\": transaction_facts\n    }\n\
+          \n    return {\n        \"tax_case_id\": tax_case_id,\n        \"transaction_facts\"\
+          : transaction_facts,\n        \"transaction_facts_payload\": payload,\n\
+          \        \"transaction_facts_status\": \"complete_success\"\n    }"
+        code_language: python3
+        outputs:
+          tax_case_id:
+            children: null
+            type: string
+          transaction_facts:
+            children: null
+            type: array[object]
+          transaction_facts_payload:
+            children: null
+            type: object
+          transaction_facts_status:
+            children: null
+            type: string
+        selected: false
+        title: Transaction Facts Mock 接入
+        type: code
+        variables:
+        - value_selector:
+          - '1787794997135'
+          - contract_facts
+          value_type: object
+          variable: contract_facts
+        - value_selector:
+          - '1787794997135'
+          - actual_facts
+          value_type: object
+          variable: actual_facts
+        - value_selector:
+          - '1787794997135'
+          - evidence_state
+          value_type: object
+          variable: evidence_state
+        - value_selector:
+          - '1787794997135'
+          - economic_substance
+          value_type: object
+          variable: economic_substance
+      height: 51
+      id: '1787796773852'
+      position:
+        x: 2316
+        y: 280.6666666666667
+      positionAbsolute:
+        x: 2316
+        y: 280.6666666666667
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(transaction_facts_payload: dict) -> dict:\n    if not isinstance(transaction_facts_payload,\
+          \ dict):\n        transaction_facts_payload = {}\n\n    tax_case_id = (\n\
+          \        transaction_facts_payload.get(\"tax_case_id\")\n        or \"TC-TAX-CROSS-001\"\
+          \n    )\n\n    transaction_facts = transaction_facts_payload.get(\n    \
+          \    \"transaction_facts\", []\n    )\n\n    transaction_id = \"TRANSACTION-TC-TAX-CROSS-001\"\
+          \n\n    if transaction_facts and isinstance(transaction_facts[0], dict):\n\
+          \        transaction_id = (\n            transaction_facts[0].get(\"transaction_fact_id\"\
+          )\n            or transaction_id\n        )\n\n    # 接口联调 Mock：\n    # 只验证法规结果能传递到后续节点，\n\
+          \    # 不在这里直接确定税率、税额或违规结论。\n    regulation_results = [\n        {\n    \
+          \        \"regulation_result_id\":\n                \"REGULATION-TC-TAX-CROSS-001\"\
+          ,\n            \"tax_type\": \"value_added_tax\",\n            \"judgement_item\"\
+          :\n                \"technical_consulting_vat_scope\",\n            \"applicable_date\"\
+          : \"2024-06-28\",\n            \"date_source_field\": \"acceptance_date\"\
+          ,\n            \"date_confidence\": 1,\n            \"date_derivation_reason\"\
+          :\n                \"使用CT01已确认验收日期进行时间适用性测试\",\n            \"legal_condition_text\"\
+          :\n                \"技术咨询服务的增值税处理，需要结合业务性质、\"\n                \"纳税人身份及适用期间进一步判断。\"\
+          ,\n            \"legal_conditions\": [\n                {\n            \
+          \        \"condition_type\":\n                        \"deterministic_condition\"\
+          ,\n                    \"fact_path\":\n                        f\"/objects/{transaction_id}/substance_code\"\
+          ,\n                    \"operator\": \"eq\",\n                    \"expected_value\"\
+          :\n                        \"technical_consulting\"\n                }\n\
+          \            ],\n            \"value\": \"candidate_applicable\",\n    \
+          \        \"legal_basis_ids\": [\n                \"LAW_VAT_H001\"\n    \
+          \        ],\n            \"regulations\": [\n                {\n       \
+          \             \"law_id\": \"LAW_VAT_H001\",\n                    \"title\"\
+          :\n                        \"全面推开营业税改征增值税试点的通知\",\n                    \"\
+          document_no\": \"财税〔2016〕36号\",\n                    \"issuer\": \"财政部、国家税务总局\"\
+          ,\n                    \"article\": None,\n                    \"valid_from\"\
+          : \"2016-05-01\",\n                    \"valid_to\": None,\n           \
+          \         \"source\":\n                        \"https://fgk.chinatax.gov.cn/\"\
+          \n                        \"zcfgk/c100009/c5237365/content.html\",\n   \
+          \                 \"citation_role\":\n                        \"implementation_basis\"\
+          ,\n                    \"applicable_reason\":\n                        \"\
+          规则库标记为部分有效，\"\n                        \"具体适用条款仍需Temporal RAG复核\",\n   \
+          \                 \"retrieval_score\": 1\n                }\n          \
+          \  ],\n            \"conflict_detected\": False,\n            \"conflicting_law_ids\"\
+          : [],\n            \"resolution_status\": \"needs_review\",\n          \
+          \  \"requires_manual_review\": True\n        }\n    ]\n\n    regulation_result_payload\
+          \ = {\n        \"tax_case_id\": tax_case_id,\n        \"regulation_results\"\
+          : regulation_results\n    }\n\n    return {\n        \"regulation_results\"\
+          : regulation_results,\n        \"regulation_result_payload\":\n        \
+          \    regulation_result_payload,\n        \"knowledge_retrieval_status\"\
+          :\n            \"complete_needs_review\"\n    }"
+        code_language: python3
+        outputs:
+          knowledge_retrieval_status:
+            children: null
+            type: string
+          regulation_result_payload:
+            children: null
+            type: object
+          regulation_results:
+            children: null
+            type: array[object]
+        selected: false
+        title: Knowledge Retrieval Mock 接入
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts_payload
+          value_type: object
+          variable: transaction_facts_payload
+      height: 51
+      id: '1787797443833'
+      position:
+        x: 4066
+        y: 336.26666666666665
+      positionAbsolute:
+        x: 4066
+        y: 336.26666666666665
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(\n    transaction_facts_payload: dict,\n    regulation_result_payload:\
+          \ dict\n) -> dict:\n    if not isinstance(transaction_facts_payload, dict):\n\
+          \        transaction_facts_payload = {}\n\n    if not isinstance(regulation_result_payload,\
+          \ dict):\n        regulation_result_payload = {}\n\n    tax_case_id = (\n\
+          \        regulation_result_payload.get(\"tax_case_id\")\n        or transaction_facts_payload.get(\"\
+          tax_case_id\")\n        or \"TC-TAX-CROSS-001\"\n    )\n\n    transaction_facts\
+          \ = transaction_facts_payload.get(\n        \"transaction_facts\", []\n\
+          \    )\n\n    transaction_id = \"TRANSACTION-TC-TAX-CROSS-001\"\n    substance_code\
+          \ = \"technical_consulting\"\n\n    if transaction_facts and isinstance(\n\
+          \        transaction_facts[0], dict\n    ):\n        transaction_id = (\n\
+          \            transaction_facts[0].get(\n                \"transaction_fact_id\"\
+          \n            )\n            or transaction_id\n        )\n\n        substance_code\
+          \ = (\n            transaction_facts[0].get(\"substance_code\")\n      \
+          \      or substance_code\n        )\n\n    regulation_results = regulation_result_payload.get(\n\
+          \        \"regulation_results\", []\n    )\n\n    law_id = \"LAW_VAT_H001\"\
+          \n    requires_review = True\n\n    if regulation_results and isinstance(\n\
+          \        regulation_results[0], dict\n    ):\n        legal_basis_ids =\
+          \ regulation_results[0].get(\n            \"legal_basis_ids\", []\n    \
+          \    )\n\n        if legal_basis_ids:\n            law_id = legal_basis_ids[0]\n\
+          \n        requires_review = regulation_results[0].get(\n            \"requires_manual_review\"\
+          , True\n        )\n\n    legal_basis_ids = [law_id]\n    fact_basis_ids\
+          \ = [transaction_id]\n\n    def judgement_atom(status, value):\n       \
+          \ return {\n            \"status\": status,\n            \"value\": value,\n\
+          \            \"legal_basis_ids\": legal_basis_ids,\n            \"fact_basis_ids\"\
+          : fact_basis_ids\n        }\n\n    # 只确认现有材料能够支持的部分。\n    # 纳税人身份、税率、申报及缴税时间仍为\
+          \ unknown，\n    # unknown 不等于违规。\n    vat = {\n        \"status\": \"partial\"\
+          ,\n        \"applicability\": judgement_atom(\n            \"partial\",\
+          \ True\n        ),\n        \"taxpayer\": judgement_atom(\n            \"\
+          unknown\", None\n        ),\n        \"taxable_activity\": judgement_atom(\n\
+          \            \"partial\", substance_code\n        ),\n        \"taxable_amount\"\
+          : judgement_atom(\n            \"unknown\", None\n        ),\n        \"\
+          tax_rate\": judgement_atom(\n            \"unknown\", None\n        ),\n\
+          \        \"levy_rate\": judgement_atom(\n            \"unknown\", None\n\
+          \        ),\n        \"filing_obligation\": judgement_atom(\n          \
+          \  \"unknown\", None\n        ),\n        \"payment_obligation\": judgement_atom(\n\
+          \            \"unknown\", None\n        ),\n        \"filing_deadline\"\
+          : judgement_atom(\n            \"unknown\", None\n        ),\n        \"\
+          payment_deadline\": judgement_atom(\n            \"unknown\", None\n   \
+          \     )\n    }\n\n    judgement_status = \"partial\"\n\n    tax_judgement_payload\
+          \ = {\n        \"tax_case_id\": tax_case_id,\n        \"judgement_status\"\
+          : judgement_status,\n        \"vat\": vat\n    }\n\n    node_status = (\n\
+          \        \"complete_needs_review\"\n        if requires_review\n       \
+          \ else \"complete_success\"\n    )\n\n    return {\n        \"tax_judgement_payload\"\
+          :\n            tax_judgement_payload,\n        \"judgement_status\":\n \
+          \           judgement_status,\n        \"tax_judgement_node_status\":\n\
+          \            node_status\n    }"
+        code_language: python3
+        outputs:
+          judgement_status:
+            children: null
+            type: string
+          tax_judgement_node_status:
+            children: null
+            type: string
+          tax_judgement_payload:
+            children: null
+            type: object
+        selected: false
+        title: Tax Judgement Mock 接入
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts_payload
+          value_type: object
+          variable: transaction_facts_payload
+        - value_selector:
+          - '1787797443833'
+          - regulation_result_payload
+          value_type: object
+          variable: regulation_result_payload
+      height: 51
+      id: '1787798299682'
+      position:
+        x: 4408
+        y: 344.93333333333334
+      positionAbsolute:
+        x: 4408
+        y: 344.93333333333334
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "import json\n\n\ndef main(\n    tax_case_id: str,\n    transaction_facts:\
+          \ list,\n    regulation_results: list,\n    tax_judgement_payload: dict,\n\
+          \    economic_substance: dict,\n    evidence_state: dict\n) -> dict:\n \
+          \   transaction_facts = (\n        transaction_facts\n        if isinstance(transaction_facts,\
+          \ list)\n        else []\n    )\n\n    regulation_results = (\n        regulation_results\n\
+          \        if isinstance(regulation_results, list)\n        else []\n    )\n\
+          \n    tax_judgement_payload = (\n        tax_judgement_payload\n       \
+          \ if isinstance(tax_judgement_payload, dict)\n        else {}\n    )\n\n\
+          \    economic_substance = (\n        economic_substance\n        if isinstance(economic_substance,\
+          \ dict)\n        else {}\n    )\n\n    evidence_state = (\n        evidence_state\n\
+          \        if isinstance(evidence_state, dict)\n        else {}\n    )\n\n\
+          \    case_id = (\n        tax_case_id\n        or tax_judgement_payload.get(\"\
+          tax_case_id\")\n        or \"TC-TAX-CROSS-001\"\n    )\n\n    def collect_refs(items,\
+          \ field):\n        refs = []\n\n        for item in items:\n           \
+          \ if isinstance(item, dict) and item.get(field):\n                refs.append(item[field])\n\
+          \n        return refs\n\n    transaction_fact_refs = collect_refs(\n   \
+          \     transaction_facts,\n        \"transaction_fact_id\"\n    )\n\n   \
+          \ regulation_result_refs = collect_refs(\n        regulation_results,\n\
+          \        \"regulation_result_id\"\n    )\n\n    substance_components = economic_substance.get(\n\
+          \        \"economic_substance_components\", []\n    )\n\n    economic_substance_refs\
+          \ = collect_refs(\n        substance_components,\n        \"substance_component_id\"\
+          \n    )\n\n    evidence_states = evidence_state.get(\n        \"evidence_states\"\
+          , []\n    )\n\n    evidence_state_refs = collect_refs(\n        evidence_states,\n\
+          \        \"evidence_state_id\"\n    )\n\n    rule_engine_input = {\n   \
+          \     \"tax_case_id\": case_id,\n        \"transaction_fact_refs\":\n  \
+          \          transaction_fact_refs,\n        \"economic_substance_refs\":\n\
+          \            economic_substance_refs,\n        \"consistency_check_refs\"\
+          : [],\n        \"regulation_result_refs\":\n            regulation_result_refs,\n\
+          \        \"evidence_state_refs\":\n            evidence_state_refs,\n  \
+          \      \"actual_tax_filing_refs\": [],\n        \"actual_tax_payment_refs\"\
+          : []\n    }\n\n    transaction_ref = (\n        transaction_fact_refs[0]\n\
+          \        if transaction_fact_refs\n        else \"TRANSACTION-TC-TAX-CROSS-001\"\
+          \n    )\n\n    regulation_ref = (\n        regulation_result_refs[0]\n \
+          \       if regulation_result_refs\n        else \"REGULATION-TC-TAX-CROSS-001\"\
+          \n    )\n\n    rule_execution_id = (\n        \"EXEC_RULE_VAT_SCOPE_REVIEW_001\"\
+          \n    )\n\n    # 法规仍需人工复核，因此不能生成已确认违规。\n    rule_execution_results = [\n\
+          \        {\n            \"rule_execution_id\":\n                rule_execution_id,\n\
+          \            \"rule_id\":\n                \"RULE_VAT_SCOPE_REVIEW_001\"\
+          ,\n            \"target_judgement_item\":\n                \"technical_consulting_vat_scope\"\
+          ,\n            \"status\": \"unknown\",\n            \"value\": None,\n\
+          \            \"legal_basis_ids\": [\n                \"LAW_VAT_H001\"\n\
+          \            ],\n            \"fact_basis_ids\": [\n                regulation_ref,\n\
+          \                transaction_ref\n            ],\n            \"evaluated_condition_ids\"\
+          : [\n                \"COND_VAT_SUBSTANCE_001\",\n                \"COND_VAT_TEMPORAL_REVIEW_001\"\
+          \n            ]\n        }\n    ]\n\n    judgement_resolution_results =\
+          \ [\n        {\n            \"judgement_resolution_id\":\n             \
+          \   \"RESOLUTION_technical_consulting_vat_scope\",\n            \"target_judgement_item\"\
+          :\n                \"technical_consulting_vat_scope\",\n            \"resolution_status\"\
+          :\n                \"insufficient\",\n            \"value\": None,\n   \
+          \         \"legal_basis_ids\": [\n                \"LAW_VAT_H001\"\n   \
+          \         ],\n            \"fact_basis_ids\": [\n                regulation_ref,\n\
+          \                transaction_ref\n            ],\n            \"supporting_rule_execution_ids\"\
+          : [\n                rule_execution_id\n            ],\n            \"conflicting_rule_execution_ids\"\
+          : []\n        }\n    ]\n\n    rule_engine_output = {\n        \"tax_case_id\"\
+          : case_id,\n        \"rule_execution_results\":\n            rule_execution_results,\n\
+          \        \"judgement_resolution_results\":\n            judgement_resolution_results\n\
+          \    }\n\n    requirement_instances = evidence_state.get(\n        \"evidence_requirement_instances\"\
+          , []\n    )\n\n    requirement_map = {}\n\n    for item in requirement_instances:\n\
+          \        if not isinstance(item, dict):\n            continue\n\n      \
+          \  instance_id = item.get(\n            \"evidence_requirement_instance_id\"\
+          \n        )\n\n        if instance_id:\n            requirement_map[instance_id]\
+          \ = item\n\n    state_factor_map = {\n        \"provided\": 0,\n       \
+          \ \"unknown\": 0.5,\n        \"missing\": 1\n    }\n\n    evidence_loss_details\
+          \ = []\n    evidence_gaps = []\n    total_evidence_loss = 0\n\n    for state_item\
+          \ in evidence_states:\n        if not isinstance(state_item, dict):\n  \
+          \          continue\n\n        state = state_item.get(\"state\", \"unknown\"\
+          )\n\n        if state == \"not_applicable\":\n            continue\n\n \
+          \       instance_id = state_item.get(\n            \"evidence_requirement_instance_id\"\
+          \n        ) or \"ERI-TC-TAX-CROSS-001\"\n\n        requirement = requirement_map.get(\n\
+          \            instance_id, {}\n        )\n\n        requirement_id = requirement.get(\n\
+          \            \"evidence_requirement_id\"\n        ) or \"contract_performance_evidence\"\
+          \n\n        state_id = state_item.get(\n            \"evidence_state_id\"\
+          \n        ) or \"EVIDENCE-STATE-TC-TAX-CROSS-001\"\n\n        configured_loss\
+          \ = 12\n        state_factor = state_factor_map.get(\n            state,\
+          \ 0.5\n        )\n\n        actual_loss = (\n            configured_loss\
+          \ * state_factor\n        )\n\n        total_evidence_loss += actual_loss\n\
+          \n        evidence_loss_details.append({\n            \"evidence_requirement_instance_id\"\
+          :\n                instance_id,\n            \"evidence_requirement_id\"\
+          :\n                requirement_id,\n            \"evidence_state_id\": state_id,\n\
+          \            \"state\": state,\n            \"configured_loss\": configured_loss,\n\
+          \            \"state_factor\": state_factor,\n            \"actual_evidence_coverage_loss\"\
+          :\n                actual_loss\n        })\n\n        if state in [\"unknown\"\
+          , \"missing\"]:\n            evidence_gaps.append({\n                \"\
+          evidence_requirement_instance_id\":\n                    instance_id,\n\
+          \                \"evidence_requirement_id\":\n                    requirement_id,\n\
+          \                \"evidence_state_id\":\n                    state_id,\n\
+          \                \"state\": state\n            })\n\n    evidence_coverage\
+          \ = int(\n        max(\n            0,\n            100 - min(100, total_evidence_loss)\n\
+          \        )\n    )\n\n    evidence_coverage_preview = {\n        \"tax_case_id\"\
+          : case_id,\n        \"evidence_coverage\":\n            evidence_coverage,\n\
+          \        \"total_evidence_coverage_loss\":\n            total_evidence_loss,\n\
+          \        \"evidence_loss_details\":\n            evidence_loss_details,\n\
+          \        \"calculation_status\":\n            \"complete\"\n    }\n\n  \
+          \  # 当前没有“已确认风险”，所以健康分不扣分。\n    # 待复核和 unknown 不能当作违规。\n    score_preview\
+          \ = {\n        \"tax_case_id\": case_id,\n        \"tax_health_score\":\
+          \ 100,\n        \"total_health_score_loss\": 0,\n        \"final_risk_event_ids\"\
+          : [],\n        \"calculation_status\":\n            \"complete_needs_review\"\
+          \n    }\n\n    rule_engine_status = (\n        \"complete_needs_review\"\
+          \n    )\n\n    return {\n        \"rule_engine_input\":\n            rule_engine_input,\n\
+          \        \"rule_engine_output\":\n            rule_engine_output,\n    \
+          \    \"score_preview\":\n            score_preview,\n        \"evidence_coverage_preview\"\
+          :\n            evidence_coverage_preview,\n        \"risk_level\": \"low\"\
+          ,\n        \"risk_codes\": [],\n        \"evidence_gaps\":\n           \
+          \ evidence_gaps,\n        \"rule_engine_status\":\n            rule_engine_status,\n\
+          \        \"score_preview_text\":\n            json.dumps(\n            \
+          \    score_preview,\n                ensure_ascii=False\n            ),\n\
+          \        \"evidence_coverage_preview_text\":\n            json.dumps(\n\
+          \                evidence_coverage_preview,\n                ensure_ascii=False\n\
+          \            )\n    }"
+        code_language: python3
+        desc: 将 Temporal RAG 返回的法规结果统一为 Consistency Check / Rule Engine 可识别的标准字段；保留来源、版本与适用性信息，不创建新的知识库。
+        outputs:
+          evidence_coverage_preview:
+            children: null
+            type: object
+          evidence_coverage_preview_text:
+            children: null
+            type: string
+          evidence_gaps:
+            children: null
+            type: array[object]
+          risk_codes:
+            children: null
+            type: array[string]
+          risk_level:
+            children: null
+            type: string
+          rule_engine_input:
+            children: null
+            type: object
+          rule_engine_output:
+            children: null
+            type: object
+          rule_engine_status:
+            children: null
+            type: string
+          score_preview:
+            children: null
+            type: object
+          score_preview_text:
+            children: null
+            type: string
+        selected: false
+        title: Rule Engine Mock 接入
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - tax_case_id
+          value_type: string
+          variable: tax_case_id
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts
+          value_type: array[object]
+          variable: transaction_facts
+        - value_selector:
+          - '1787797443833'
+          - regulation_results
+          value_type: array[object]
+          variable: regulation_results
+        - value_selector:
+          - '1787798299682'
+          - tax_judgement_payload
+          value_type: object
+          variable: tax_judgement_payload
+        - value_selector:
+          - '1787794997135'
+          - economic_substance
+          value_type: object
+          variable: economic_substance
+        - value_selector:
+          - '1787794997135'
+          - evidence_state
+          value_type: object
+          variable: evidence_state
+      height: 127
+      id: '1787799955734'
+      position:
+        x: 4750
+        y: 353.6
+      positionAbsolute:
+        x: 4750
+        y: 353.6
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        outputs:
+        - value_selector:
+          - '1787799955734'
+          - risk_level
+          value_type: string
+          variable: risk_level
+        - value_selector:
+          - '1787799955734'
+          - risk_codes
+          value_type: array[string]
+          variable: risk_codes
+        - value_selector:
+          - '1787799955734'
+          - evidence_gaps
+          value_type: array[object]
+          variable: evidence_gaps
+        - value_selector:
+          - '1787799955734'
+          - rule_engine_status
+          value_type: string
+          variable: rule_engine_status
+        - value_selector:
+          - '1787799955734'
+          - score_preview_text
+          value_type: string
+          variable: score_preview_text
+        - value_selector:
+          - '1787799955734'
+          - evidence_coverage_preview_text
+          value_type: string
+          variable: evidence_coverage_preview_text
+        selected: false
+        title: 最终正常输出
+        type: end
+      height: 221
+      id: '1787822187854'
+      position:
+        x: 5092
+        y: 279.26666666666665
+      positionAbsolute:
+        x: 5092
+        y: 279.26666666666665
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "def main(transaction_facts: list) -> dict:\n    if not isinstance(transaction_facts,\
+          \ list):\n        transaction_facts = []\n\n    contract_fact_refs = []\n\
+          \n    for fact in transaction_facts:\n        if not isinstance(fact, dict):\n\
+          \            continue\n\n        refs = fact.get(\"contract_fact_refs\"\
+          , [])\n\n        if not isinstance(refs, list):\n            continue\n\n\
+          \        for ref in refs:\n            if ref and ref not in contract_fact_refs:\n\
+          \                contract_fact_refs.append(ref)\n\n    contract_names =\
+          \ {\n        \"CONTRACT-FACT-CT01\": \"CT01 数字化战略咨询\",\n        \"CONTRACT-FACT-CT02\"\
+          : \"CT02 数据治理实施\",\n        \"CONTRACT-FACT-CT03\": \"CT03 独立质量复核\"\n  \
+          \  }\n\n    contract_documents = []\n\n    for index, ref in enumerate(contract_fact_refs):\n\
+          \        contract_documents.append({\n            \"source_document_id\"\
+          : ref,\n            \"source_file_type\": \"contract\",\n            \"\
+          contract_fact_id\": ref,\n            \"contract_document_role\": (\n  \
+          \              \"main_contract\"\n                if index == 0\n      \
+          \          else \"related_contract\"\n            ),\n            \"contract_name\"\
+          : contract_names.get(\n                ref, ref\n            ),\n      \
+          \      \"counterparty_name\": \"unknown\",\n            \"subject_summary\"\
+          : contract_names.get(\n                ref, ref\n            ),\n      \
+          \      \"amount\": None,\n            \"currency\": \"CNY\",\n         \
+          \   \"signing_date\": None,\n            \"economic_substance\":\n     \
+          \           \"technical_consulting\"\n        })\n\n    contract_count =\
+          \ len(contract_fact_refs)\n    is_multi_contract = contract_count > 1\n\n\
+          \    if contract_count == 0:\n        workflow_route = \"no_contract\"\n\
+          \    elif is_multi_contract:\n        workflow_route = \"multi_contract_chain\"\
+          \n    else:\n        workflow_route = (\n            \"single_contract_tax_judgement\"\
+          \n        )\n\n    return {\n        \"contract_count\": contract_count,\n\
+          \        \"is_multi_contract\": is_multi_contract,\n        \"workflow_route\"\
+          : workflow_route,\n        \"contract_documents\": contract_documents\n\
+          \    }"
+        code_language: python3
+        outputs:
+          contract_count:
+            children: null
+            type: number
+          contract_documents:
+            children: null
+            type: array[object]
+          is_multi_contract:
+            children: null
+            type: boolean
+          workflow_route:
+            children: null
+            type: string
+        selected: false
+        title: 合同数量判断
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts
+          value_type: array[object]
+          variable: transaction_facts
+      height: 51
+      id: '1788673950422'
+      position:
+        x: 2658
+        y: 289.3333333333333
+      positionAbsolute:
+        x: 2658
+        y: 289.3333333333333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: 3f055a57-9405-473a-97e5-0a2899ffe192
+            value: true
+            varType: boolean
+            variable_selector:
+            - '1788673950422'
+            - is_multi_contract
+          id: 'true'
+          logical_operator: and
+        selected: false
+        title: 条件分支 2
+        type: if-else
+      height: 147
+      id: '1788675393645'
+      position:
+        x: 3000
+        y: 250
+      positionAbsolute:
+        x: 3000
+        y: 250
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "import json\n\n\ndef main(\n    tax_case_id: str,\n    contract_documents:\
+          \ list,\n    transaction_facts: list\n) -> dict:\n    if not isinstance(contract_documents,\
+          \ list):\n        contract_documents = []\n\n    if not isinstance(transaction_facts,\
+          \ list):\n        transaction_facts = []\n\n    case_id = (\n        tax_case_id\n\
+          \        or \"TC-TAX-CROSS-001\"\n    )\n\n    contract_nodes = []\n   \
+          \ source_document_ids = []\n\n    for index, document in enumerate(\n  \
+          \      contract_documents\n    ):\n        if not isinstance(document, dict):\n\
+          \            continue\n\n        source_document_id = (\n            document.get(\"\
+          source_document_id\")\n            or f\"CONTRACT-DOCUMENT-{index + 1:03d}\"\
+          \n        )\n\n        contract_fact_id = (\n            document.get(\"\
+          contract_fact_id\")\n            or source_document_id\n        )\n\n  \
+          \      source_document_ids.append(\n            source_document_id\n   \
+          \     )\n\n        contract_nodes.append({\n            \"contract_node_id\"\
+          :\n                f\"CHAIN-NODE-{index + 1:03d}\",\n            \"source_document_id\"\
+          :\n                source_document_id,\n            \"contract_fact_id\"\
+          :\n                contract_fact_id,\n            \"document_role\":\n \
+          \               document.get(\n                    \"contract_document_role\"\
+          \n                ) or \"related_contract\",\n            \"contract_name\"\
+          :\n                document.get(\"contract_name\")\n                or contract_fact_id,\n\
+          \            \"counterparty_name\":\n                document.get(\"counterparty_name\"\
+          )\n                or \"unknown\",\n            \"subject_summary\":\n \
+          \               document.get(\"subject_summary\")\n                or \"\
+          \",\n            \"amount\": document.get(\"amount\"),\n            \"currency\"\
+          :\n                document.get(\"currency\")\n                or \"CNY\"\
+          ,\n            \"signing_date\":\n                document.get(\"signing_date\"\
+          ),\n            \"economic_substance\":\n                document.get(\n\
+          \                    \"economic_substance\"\n                ) or \"technical_consulting\"\
+          \n        })\n\n    contract_edges = []\n\n    if len(contract_nodes) >\
+          \ 1:\n        main_node = contract_nodes[0]\n\n        for related_node\
+          \ in contract_nodes[1:]:\n            contract_edges.append({\n        \
+          \        \"from_contract_node_id\":\n                    main_node[\"contract_node_id\"\
+          ],\n                \"to_contract_node_id\":\n                    related_node[\"\
+          contract_node_id\"],\n                \"relation_type\":\n             \
+          \       \"related_service_contract\",\n                \"relation_status\"\
+          : \"candidate\",\n                \"relation_reason\":\n               \
+          \     \"多个合同事实共同关联至同一交易事实，\"\n                    \"具体法律关系仍需人工复核。\",\n \
+          \               \"source_fact_ids\": [\n                    main_node[\"\
+          contract_fact_id\"],\n                    related_node[\"contract_fact_id\"\
+          ]\n                ]\n            })\n\n    transaction_fact_ids = []\n\n\
+          \    for fact in transaction_facts:\n        if not isinstance(fact, dict):\n\
+          \            continue\n\n        transaction_fact_id = fact.get(\n     \
+          \       \"transaction_fact_id\"\n        )\n\n        if transaction_fact_id:\n\
+          \            transaction_fact_ids.append(\n                transaction_fact_id\n\
+          \            )\n\n    contract_chain = {\n        \"contract_chain_id\"\
+          :\n            \"CONTRACT-CHAIN-TC-TAX-CROSS-001\",\n        \"chain_sequence_no\"\
+          : 1,\n        \"chain_type\":\n            \"related_contract_group\",\n\
+          \        \"chain_status\": \"candidate\",\n        \"contract_nodes\": contract_nodes,\n\
+          \        \"contract_edges\": contract_edges,\n        \"source_document_ids\"\
+          :\n            source_document_ids,\n        \"transaction_fact_ids\":\n\
+          \            transaction_fact_ids,\n        \"chain_summary\":\n       \
+          \     \"CT01、CT02、CT03共同组成多合同服务交易候选链。\",\n        \"trace\": {\n       \
+          \     \"built_from\":\n                source_document_ids,\n          \
+          \  \"notes\": [\n                \"Mock用于验证多合同分支接口。\",\n               \
+          \ \"候选关系不等于已确认法律结论。\"\n            ]\n        }\n    }\n\n    contract_chains\
+          \ = (\n        [contract_chain]\n        if contract_nodes\n        else\
+          \ []\n    )\n\n    contract_chain_payload = {\n        \"tax_case_id\":\
+          \ case_id,\n        \"contract_chains\": contract_chains\n    }\n\n    return\
+          \ {\n        \"contract_chains\":\n            contract_chains,\n      \
+          \  \"contract_chain_payload\":\n            contract_chain_payload,\n  \
+          \      \"contract_chain_status\":\n            \"complete_needs_review\"\
+          ,\n        \"contract_chain_payload_text\":\n            json.dumps(\n \
+          \               contract_chain_payload,\n                ensure_ascii=False\n\
+          \            )\n    }"
+        code_language: python3
+        outputs:
+          contract_chain_payload:
+            children: null
+            type: object
+          contract_chain_payload_text:
+            children: null
+            type: string
+          contract_chain_status:
+            children: null
+            type: string
+          contract_chains:
+            children: null
+            type: array[object]
+        selected: false
+        title: 多合同证据链 Mock
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - tax_case_id
+          value_type: string
+          variable: tax_case_id
+        - value_selector:
+          - '1788673950422'
+          - contract_documents
+          value_type: array[object]
+          variable: contract_documents
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts
+          value_type: array[object]
+          variable: transaction_facts
+      height: 51
+      id: '1788675871510'
+      position:
+        x: 3362
+        y: 285.26666666666665
+      positionAbsolute:
+        x: 3362
+        y: 285.26666666666665
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    - data:
+        code: "import json\n\n\ndef main(\n    tax_case_id: str,\n    contract_chains:\
+          \ list,\n    transaction_facts: list,\n    contract_facts: dict\n) -> dict:\n\
+          \    if not isinstance(contract_chains, list):\n        contract_chains\
+          \ = []\n\n    if not isinstance(transaction_facts, list):\n        transaction_facts\
+          \ = []\n\n    if not isinstance(contract_facts, dict):\n        contract_facts\
+          \ = {}\n\n    case_id = (\n        tax_case_id\n        or contract_facts.get(\"\
+          tax_case_id\")\n        or \"TC-TAX-CROSS-001\"\n    )\n\n    contract_amount\
+          \ = contract_facts.get(\n        \"contract_amount\"\n    )\n\n    currency\
+          \ = (\n        contract_facts.get(\"currency\")\n        or \"CNY\"\n  \
+          \  )\n\n    transaction_fact_ids = []\n\n    for fact in transaction_facts:\n\
+          \        if not isinstance(fact, dict):\n            continue\n\n      \
+          \  fact_id = fact.get(\n            \"transaction_fact_id\"\n        )\n\
+          \n        if fact_id:\n            transaction_fact_ids.append(\n      \
+          \          fact_id\n            )\n\n    chain_metrics = []\n\n    for index,\
+          \ chain in enumerate(\n        contract_chains\n    ):\n        if not isinstance(chain,\
+          \ dict):\n            continue\n\n        chain_id = (\n            chain.get(\"\
+          contract_chain_id\")\n            or f\"CONTRACT-CHAIN-{index + 1:03d}\"\
+          \n        )\n\n        contract_nodes = chain.get(\n            \"contract_nodes\"\
+          , []\n        )\n\n        if not isinstance(contract_nodes, list):\n  \
+          \          contract_nodes = []\n\n        source_contract_node_ids = []\n\
+          \n        for node in contract_nodes:\n            if not isinstance(node,\
+          \ dict):\n                continue\n\n            node_id = node.get(\n\
+          \                \"contract_node_id\"\n            )\n\n            if node_id:\n\
+          \                source_contract_node_ids.append(\n                    node_id\n\
+          \                )\n\n        amount_breakdown = []\n\n        if isinstance(\n\
+          \            contract_amount, (int, float)\n        ):\n            amount_breakdown.append({\n\
+          \                \"amount_item_id\":\n                    \"AMOUNT-COMBINED-001\"\
+          ,\n                \"amount_role\":\n                    \"combined_contract_amount\"\
+          ,\n                \"amount\": contract_amount,\n                \"currency\"\
+          : currency,\n                \"source_contract_node_id\":\n            \
+          \        (\n                        source_contract_node_ids[0]\n      \
+          \                  if source_contract_node_ids\n                       \
+          \ else None\n                    ),\n                \"source_document_id\"\
+          :\n                    \"CONTRACT-FACT-CT01\",\n                \"source_fact_id\"\
+          :\n                    \"CONTRACT-FACT-CT01\",\n                \"explanation\"\
+          :\n                    \"该金额是三份合同合并金额；\"\n                    \"当前材料不足以分配各合同的收入、\"\
+          \n                    \"成本及利润金额。\"\n            })\n\n        metric = {\n\
+          \            \"chain_metric_id\":\n                f\"CHAIN-METRIC-{index\
+          \ + 1:03d}\",\n            \"contract_chain_id\":\n                chain_id,\n\
+          \            \"calculation_status\":\n                \"complete_needs_review\"\
+          ,\n            \"total_revenue_amount\": None,\n            \"total_cost_amount\"\
+          : None,\n            \"hidden_profit_amount\": None,\n            \"hidden_profit_rate\"\
+          : None,\n            \"currency\": currency,\n            \"revenue_contract_node_ids\"\
+          : [],\n            \"cost_contract_node_ids\": [],\n            \"source_contract_node_ids\"\
+          :\n                source_contract_node_ids,\n            \"source_transaction_fact_ids\"\
+          :\n                transaction_fact_ids,\n            \"amount_breakdown\"\
+          :\n                amount_breakdown,\n            \"calculation_basis\"\
+          :\n                \"已保留合同合并金额，但没有足够事实\"\n                \"确定收入、成本方向及隐藏利润。\"\
+          ,\n            \"warnings\": [\n                \"不得将合同总金额直接认定为收入或成本。\"\
+          ,\n                \"不得因金额无法分配而直接认定税务风险。\",\n                \"需要人工复核各合同的付款方向和经济角色。\"\
+          \n            ],\n            \"trace\": {\n                \"calculated_from\"\
+          :\n                    source_contract_node_ids,\n                \"missing_fields\"\
+          : [\n                    \"revenue_contract_node_ids\",\n              \
+          \      \"cost_contract_node_ids\",\n                    \"contract_amount_allocation\"\
+          \n                ],\n                \"notes\": [\n                   \
+          \ \"Mock用于验证多合同链条指标接口。\",\n                    \"unknown不等于违规。\"\n     \
+          \           ]\n            }\n        }\n\n        chain_metrics.append(metric)\n\
+          \n    chain_metrics_payload = {\n        \"tax_case_id\": case_id,\n   \
+          \     \"chain_metrics\": chain_metrics\n    }\n\n    return {\n        \"\
+          chain_metrics\": chain_metrics,\n        \"chain_metrics_payload\":\n  \
+          \          chain_metrics_payload,\n        \"chain_metrics_status\":\n \
+          \           \"complete_needs_review\",\n        \"chain_metrics_payload_text\"\
+          :\n            json.dumps(\n                chain_metrics_payload,\n   \
+          \             ensure_ascii=False\n            )\n    }"
+        code_language: python3
+        outputs:
+          chain_metrics:
+            children: null
+            type: array[object]
+          chain_metrics_payload:
+            children: null
+            type: object
+          chain_metrics_payload_text:
+            children: null
+            type: string
+          chain_metrics_status:
+            children: null
+            type: string
+        selected: false
+        title: 多合同链条指标 Mock
+        type: code
+        variables:
+        - value_selector:
+          - '1787796773852'
+          - tax_case_id
+          value_type: string
+          variable: tax_case_id
+        - value_selector:
+          - '1788675871510'
+          - contract_chains
+          value_type: array[object]
+          variable: contract_chains
+        - value_selector:
+          - '1787796773852'
+          - transaction_facts
+          value_type: array[object]
+          variable: transaction_facts
+        - value_selector:
+          - '1787794997135'
+          - contract_facts
+          value_type: object
+          variable: contract_facts
+      height: 51
+      id: '1788676244020'
+      position:
+        x: 3704
+        y: 293.93333333333334
+      positionAbsolute:
+        x: 3704
+        y: 293.93333333333334
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 241
+      zIndex: 0
+    viewport:
+      x: -2036.3988465756167
+      y: 267.25460455310196
+      zoom: 0.5099086516212215
+  rag_pipeline_variables: []
